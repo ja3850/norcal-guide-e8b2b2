@@ -19,17 +19,21 @@
     --tbd-bg: #ede9f3;
     --tbd-ink: #5b4a80;
     --anchor-bg: #e8e4da;
+    --en-high: #b3402e;
+    --en-mid: #c07a1f;
+    --en-med: #3e7a5e;
+    --en-low: #4a7ba6;
     --shadow: 0 1px 3px rgba(32, 41, 31, .08);
     --display: "Iowan Old Style", "Palatino", "Palatino Linotype", "Book Antiqua", Georgia, serif;
     --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, monospace;
     /* spacing scale (theme-independent — defined once) */
-    --sp-1: .35rem;
-    --sp-2: .65rem;
-    --sp-3: 1rem;
-    --sp-4: 1.5rem;
-    --sp-5: 2.25rem;
-    --pad-x: 1.2rem;   /* card/section horizontal padding */
+    --sp-1: .45rem;
+    --sp-2: .8rem;
+    --sp-3: 1.2rem;
+    --sp-4: 1.8rem;
+    --sp-5: 2.6rem;
+    --pad-x: 1.25rem;   /* card/section horizontal padding */
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -49,6 +53,10 @@
       --tbd-bg: #262133;
       --tbd-ink: #b3a3dd;
       --anchor-bg: #2b2f26;
+      --en-high: #e06a55;
+      --en-mid: #d99a3d;
+      --en-med: #6fbf97;
+      --en-low: #7fa8d0;
       --shadow: 0 1px 3px rgba(0, 0, 0, .4);
     }
   }
@@ -69,6 +77,10 @@
     --tbd-bg: #ede9f3;
     --tbd-ink: #5b4a80;
     --anchor-bg: #e8e4da;
+    --en-high: #b3402e;
+    --en-mid: #c07a1f;
+    --en-med: #3e7a5e;
+    --en-low: #4a7ba6;
     --shadow: 0 1px 3px rgba(32, 41, 31, .08);
   }
   :root[data-theme="dark"] {
@@ -88,6 +100,10 @@
     --tbd-bg: #262133;
     --tbd-ink: #b3a3dd;
     --anchor-bg: #2b2f26;
+    --en-high: #e06a55;
+    --en-mid: #d99a3d;
+    --en-med: #6fbf97;
+    --en-low: #7fa8d0;
     --shadow: 0 1px 3px rgba(0, 0, 0, .4);
   }
 
@@ -97,10 +113,10 @@
     background: var(--bg);
     color: var(--ink);
     font-family: var(--body);
-    line-height: 1.6;
+    line-height: 1.65;
     margin: 0;
   }
-  .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1rem 5rem; }
+  .wrap { max-width: 30rem; margin: 0 auto; padding: 0 1rem 5rem; }
   a { color: var(--fern); }
   a:focus-visible, button:focus-visible, summary:focus-visible {
     outline: 2px solid var(--accent);
@@ -108,8 +124,8 @@
     border-radius: 3px;
   }
   h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.2; }
-  h1 { font-size: 1.9rem; margin: .3rem 0 .45rem; font-weight: 600; }
-  h2 { font-size: 1.35rem; margin: 0; font-weight: 600; }
+  h1 { font-size: 1.7rem; margin: .3rem 0 .5rem; font-weight: 600; }
+  h2 { font-size: 1.25rem; margin: 0; font-weight: 600; }
   h3 { font-size: 1.05rem; margin: var(--sp-5) 0 .75rem; font-weight: 600; }
   p { margin: var(--sp-2) 0; }
   ul { margin: var(--sp-2) 0; padding-left: 1.3rem; }
@@ -169,12 +185,16 @@
     flex: 0 0 auto; text-decoration: none;
     border: 1px solid var(--line); border-radius: 10px;
     background: var(--surface);
-    padding: .45rem .7rem; text-align: center; color: var(--ink);
-    line-height: 1.25;
+    padding: .5rem .75rem; text-align: center; color: var(--ink);
+    line-height: 1.3;
   }
   nav.days a .dow { display: block; font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
   nav.days a .dnum { display: block; font-family: var(--display); font-size: 1.05rem; font-weight: 600; }
-  nav.days a .nrg { display: block; font-size: .6rem; letter-spacing: -.1em; }
+  nav.days a .nrg {
+    display: flex; align-items: center; justify-content: center; gap: .25rem;
+    font-size: .6rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+  }
+  nav.days a .nrg .dot { width: .45rem; height: .45rem; }
   nav.days a.is-today { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 
   /* ---------- guide jump-nav (distinct pill row) ---------- */
@@ -225,30 +245,34 @@
   }
   details.day > summary::-webkit-details-marker { display: none; }
   details.day > summary .dnum {
-    font-family: var(--display); font-size: 1.5rem; font-weight: 700; color: var(--accent);
-    min-width: 2.4rem; font-variant-numeric: tabular-nums;
+    font-family: var(--display); font-size: 1.35rem; font-weight: 700; color: var(--accent);
+    min-width: 2.2rem; font-variant-numeric: tabular-nums;
   }
   details.day > summary .ttl { flex: 1; }
   details.day > summary h2 { font-size: 1.15rem; }
   details.day > summary .meta { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
-  details.day > summary .caret { color: var(--muted); font-size: .8rem; transition: transform .15s ease; }
+  details.day > summary .caret { color: var(--muted); font-size: 1.1rem; line-height: 1; transition: transform .15s ease; }
   details.day[open] > summary .caret { transform: rotate(90deg); }
   @media (prefers-reduced-motion: reduce) {
     details.day > summary .caret { transition: none; }
   }
   details.day > .body { padding: 0 var(--pad-x) var(--sp-4); border-top: 1px solid var(--line); }
 
-  /* ---------- schedule tables ---------- */
-  .scroll { overflow-x: auto; margin: var(--sp-3) calc(-1 * var(--pad-x)); padding: 0 var(--pad-x); }
-  table.sched { border-collapse: collapse; width: 100%; min-width: 22rem; font-size: .9rem; }
-  table.sched th {
-    text-align: left; font-size: .7rem; letter-spacing: .07em; text-transform: uppercase;
-    color: var(--muted); padding: .45rem .6rem .45rem 0; border-bottom: 1px solid var(--line);
+  /* ---------- schedule (stacked — no sideways scroll) ---------- */
+  .scroll { margin: var(--sp-3) 0; }
+  table.sched { display: block; width: 100%; font-size: .9rem; }
+  table.sched thead { display: none; }
+  table.sched tbody { display: block; }
+  table.sched tr {
+    display: flex; flex-wrap: wrap; align-items: center;
+    column-gap: .7rem; row-gap: .2rem;
+    padding: var(--sp-3) 0; border-bottom: 1px solid var(--line);
   }
-  table.sched td { padding: .8rem .6rem .8rem 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.55; }
-  table.sched tr:last-child td { border-bottom: none; }
-  td.t { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: .8rem; white-space: nowrap; color: var(--muted); width: 3.6rem; }
-  td.e { width: 1.6rem; text-align: center; }
+  table.sched tr:last-child { border-bottom: none; }
+  table.sched td { display: block; border: none; padding: 0; vertical-align: top; line-height: 1.55; }
+  td.t { order: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: .8rem; white-space: nowrap; color: var(--muted); }
+  td.e { order: 1; margin-left: auto; text-align: right; }
+  td.b { order: 2; flex: 1 1 100%; }
   td.b .nm { font-weight: 600; }
   td.b .nm .mk { font-weight: 400; }
   .cue { font-size: .78rem; margin-top: .4rem; color: var(--muted); line-height: 1.5; }
@@ -291,6 +315,29 @@
     letter-spacing: .03em; vertical-align: middle; white-space: nowrap;
   }
 
+  /* energy dots (semantic, theme-tuned) */
+  .dot {
+    display: inline-block; width: .6rem; height: .6rem; border-radius: 50%;
+    vertical-align: baseline; margin-right: .05rem;
+  }
+  .dot.e1 { background: var(--en-high); }
+  .dot.e2 { background: var(--en-mid); }
+  .dot.e3 { background: var(--en-med); }
+  .dot.e4 { background: var(--en-low); }
+
+  /* block-type chips: anchor / flex / slack */
+  .chip {
+    display: inline-block; vertical-align: middle;
+    font-family: var(--body); font-size: .58rem; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: .12rem .45rem; border-radius: 5px;
+    background: var(--surface-2); color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .chip.c-anchor { background: var(--anchor-bg); color: var(--ink); border-color: transparent; }
+  .chip.c-flex { border-style: dashed; }
+  .chip.c-slack { }
+
   /* ---------- generic sections ---------- */
   section.block {
     background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
@@ -313,13 +360,30 @@
     border: 1px dashed var(--line); cursor: not-allowed;
   }
 
-  /* data tables (budget, meals) */
-  table.data { border-collapse: collapse; width: 100%; font-size: .86rem; min-width: 30rem; }
-  table.data th, table.data td { padding: .65rem .75rem; border-bottom: 1px solid var(--line); text-align: left; line-height: 1.5; }
-  table.data th { font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-  table.data td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  table.data tr.total td { font-weight: 700; border-top: 2px solid var(--ink); }
-  table.data .star { background: var(--fern-soft); }
+  /* data tables — stacked definition blocks (no sideways scroll) */
+  table.data { display: block; width: 100%; font-size: .88rem; }
+  table.data thead { display: none; }
+  table.data tbody { display: block; }
+  table.data tr {
+    display: block; padding: var(--sp-2) 0 var(--sp-3);
+    border-bottom: 1px solid var(--line);
+  }
+  table.data tr:last-child { border-bottom: none; padding-bottom: 0; }
+  table.data th, table.data td {
+    display: block; border: none; padding: .15rem 0; text-align: left; line-height: 1.5;
+  }
+  table.data td:first-child { font-weight: 650; padding-bottom: .35rem; }
+  table.data td[data-label]::before {
+    content: attr(data-label);
+    display: inline-block; min-width: 7.2rem; vertical-align: top;
+    font-family: var(--body); font-size: .66rem; font-weight: 650;
+    letter-spacing: .07em; text-transform: uppercase; color: var(--muted);
+    padding-top: .15rem;
+  }
+  table.data td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  table.data tr.total { border-top: 2px solid var(--ink); }
+  table.data tr.total td { font-weight: 700; }
+  table.data td.star { background: var(--fern-soft); border-radius: 6px; padding-left: .45rem; padding-right: .45rem; }
 
   /* emergency card */
   .emergency {
@@ -331,7 +395,7 @@
 
   /* readings cards */
   .cards { display: grid; gap: .85rem; grid-template-columns: 1fr; margin: var(--sp-3) 0; }
-  @media (min-width: 34rem) { .cards { grid-template-columns: 1fr 1fr; } }
+  /* single column everywhere — phone-app rhythm */
   .card {
     border: 1px solid var(--line); border-radius: 10px; padding: var(--sp-3) var(--sp-3);
     background: var(--surface-2); font-size: .87rem; line-height: 1.55;
@@ -367,12 +431,12 @@
     <div class="sub">Fri Jul 17 – Sat Jul 25, 2026 · own car · all times Pacific</div>
 
     <div class="offline">
-      📴 <strong>Built for dead zones.</strong> Hwy 299, the redwood groves, and the Hwy 1 coast have
+      <strong>Built for dead zones.</strong> Hwy 299, the redwood groves, and the Hwy 1 coast have
       <strong>no cell signal</strong>. Save this page to your home screen now
       (iPhone: Share → <em>Add to Home Screen</em> · Android: ⋮ → <em>Add to Home screen</em>, or ⋮ → Download page)
       and download offline Google Maps for the whole route. Everything here works with zero signal.
       <div style="margin-top:.75rem">
-        <button class="btn" id="html-btn" type="button">⬇ Download this page (HTML)</button>
+        <button class="btn" id="html-btn" type="button">Download this page (HTML)</button>
       </div>
       <p class="sub" style="margin:.5rem 0 0">Saves the whole guide as one file — <strong>no account, no signal needed</strong>. Send it to anyone; they open it in any browser and can Add to Home Screen. (It's a snapshot — grab a fresh copy after an update.)</p>
     </div>
@@ -380,7 +444,7 @@
 
   <!-- ================= NEXT ANCHOR STRIP ================= -->
   <div class="strip" id="strip">
-    <span class="lbl">Next ⚓</span>
+    <span class="lbl">Next anchor</span>
     <a class="what" id="strip-what" href="#d2">—</a>
     <span class="when" id="strip-when"></span>
     <a class="today-btn" id="strip-today" href="#d1">Today ↓</a>
@@ -388,32 +452,32 @@
 
   <!-- ================= DAY CHIPS ================= -->
   <nav class="days" id="days" aria-label="Jump to day">
-    <a href="#d1" data-day="17"><span class="dow">Fri</span><span class="dnum">17</span><span class="nrg">🔵🔵</span></a>
-    <a href="#d2" data-day="18"><span class="dow">Sat</span><span class="dnum">18</span><span class="nrg">🔴🔴🔴</span></a>
-    <a href="#d3" data-day="19"><span class="dow">Sun</span><span class="dnum">19</span><span class="nrg">🟠🟠</span></a>
-    <a href="#d47" data-day="20"><span class="dow">Mon</span><span class="dnum">20</span><span class="nrg">🔵🔵</span></a>
-    <a href="#d47" data-day="21"><span class="dow">Tue</span><span class="dnum">21</span><span class="nrg">🟢🟢</span></a>
-    <a href="#d47" data-day="22"><span class="dow">Wed</span><span class="dnum">22</span><span class="nrg">🟢🟢</span></a>
-    <a href="#d47" data-day="23"><span class="dow">Thu</span><span class="dnum">23</span><span class="nrg">🟢🟢</span></a>
-    <a href="#d8" data-day="24"><span class="dow">Fri</span><span class="dnum">24</span><span class="nrg">🔴🔴🔴</span></a>
-    <a href="#d9" data-day="25"><span class="dow">Sat</span><span class="dnum">25</span><span class="nrg">🔴🔴🔴</span></a>
+    <a href="#d1" data-day="17"><span class="dow">Fri</span><span class="dnum">17</span><span class="nrg"><span class="dot e4"></span>Low</span></a>
+    <a href="#d2" data-day="18"><span class="dow">Sat</span><span class="dnum">18</span><span class="nrg"><span class="dot e1"></span>High</span></a>
+    <a href="#d3" data-day="19"><span class="dow">Sun</span><span class="dnum">19</span><span class="nrg"><span class="dot e2"></span>Med-hi</span></a>
+    <a href="#d47" data-day="20"><span class="dow">Mon</span><span class="dnum">20</span><span class="nrg"><span class="dot e4"></span>Low</span></a>
+    <a href="#d47" data-day="21"><span class="dow">Tue</span><span class="dnum">21</span><span class="nrg"><span class="dot e3"></span>Med</span></a>
+    <a href="#d47" data-day="22"><span class="dow">Wed</span><span class="dnum">22</span><span class="nrg"><span class="dot e3"></span>Med</span></a>
+    <a href="#d47" data-day="23"><span class="dow">Thu</span><span class="dnum">23</span><span class="nrg"><span class="dot e3"></span>Med</span></a>
+    <a href="#d8" data-day="24"><span class="dow">Fri</span><span class="dnum">24</span><span class="nrg"><span class="dot e1"></span>High</span></a>
+    <a href="#d9" data-day="25"><span class="dow">Sat</span><span class="dnum">25</span><span class="nrg"><span class="dot e1"></span>High</span></a>
   </nav>
 
   <!-- ================= GUIDE JUMP-NAV ================= -->
   <nav class="guide" aria-label="Jump to guide section">
     <span class="glabel">Guide</span>
     <div class="gpills">
-      <a href="#days">🗓 Days</a>
-      <a href="#calendar">📅 Calendar</a>
-      <a href="#finances">💵 Finances</a>
-      <a href="#timing">⏰ Timing</a>
-      <a href="#readings">🌋 Readings</a>
-      <a href="#wildlife">🦌 Wildlife</a>
-      <a href="#drive-audio">🎧 Drive audio</a>
-      <a href="#fishing">🎣 Fishing</a>
-      <a href="#stars">🌌 Stars</a>
-      <a href="#practical">🚗 Practical</a>
-      <a href="#food">🍽 Food</a>
+      <a href="#days">Days</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#finances">Finances</a>
+      <a href="#timing">Timing</a>
+      <a href="#readings">Readings</a>
+      <a href="#wildlife">Wildlife</a>
+      <a href="#drive-audio">Drive audio</a>
+      <a href="#fishing">Fishing</a>
+      <a href="#stars">Stars</a>
+      <a href="#practical">Practical</a>
+      <a href="#food">Food</a>
     </div>
   </nav>
 
@@ -421,21 +485,21 @@
   <div class="legend">
     <div class="row">
       <span><b>Energy:</b></span>
-      <span>🔴 High</span><span>🟠 Med-high</span><span>🟢 Med</span><span>🔵 Low</span>
+      <span><span class="dot e1"></span> High</span><span><span class="dot e2"></span> Med-high</span><span><span class="dot e3"></span> Med</span><span><span class="dot e4"></span> Low</span>
     </div>
     <div class="row">
       <span><b>Blocks:</b></span>
-      <span>⚓ Anchor (immovable)</span>
-      <span>⚪ Flex (droppable)</span>
-      <span>⏳ Slack (buffer)</span>
+      <span><span class="chip c-anchor">Anchor</span> immovable</span>
+      <span><span class="chip c-flex">Flex</span> droppable</span>
+      <span><span class="chip c-slack">Slack</span> buffer</span>
     </div>
     <div class="row"><b>Running late? Pre-made decisions — no debate on the trail:</b></div>
     <ol>
-      <li><b>&lt; 20 min behind</b> → the ⏳ slack absorbs it. Do nothing.</li>
-      <li><b>20–45 min behind</b> → drop the next ⚪ flex block.</li>
-      <li><b>45+ min behind</b> → skip ahead to the next ⚓ anchor; message Claude to republish page + fresh ICS.</li>
+      <li><b>&lt; 20 min behind</b> → the built-in slack absorbs it. Do nothing.</li>
+      <li><b>20–45 min behind</b> → drop the next <span class="chip c-flex">Flex</span> block.</li>
+      <li><b>45+ min behind</b> → skip ahead to the next anchor; message Claude to republish page + fresh ICS.</li>
     </ol>
-    <p class="sub" style="margin:.4rem 0 0">Each major block below prints its own “✔ should be here by” check and “⏱ Behind? → skip …” call.</p>
+    <p class="sub" style="margin:.4rem 0 0">Each major block below prints its own “should be here by” check and “Behind? → skip …” call.</p>
   </div>
 
   <!-- ================= DAY 1 · FRI 7/17 ================= -->
@@ -444,9 +508,9 @@
       <span class="dnum">17</span>
       <span class="ttl">
         <h2>Fri · Arrival — San Jose → Redding</h2>
-        <div class="meta">🔵🔵 light by design · drive ~3.5–4 hr · rest up for Lassen</div>
+        <div class="meta"><span class="dot e4"></span> low energy by design · drive ~3.5–4 hr · rest up for Lassen</div>
       </span>
-      <span class="caret">▶</span>
+      <span class="caret">›</span>
     </summary>
     <div class="body">
       <div class="scroll"><table class="sched">
@@ -454,32 +518,32 @@
         <tbody>
           <tr>
             <td class="t">~2–3p</td>
-            <td class="b"><span class="nm">🚗 Depart San Jose</span>
+            <td class="b"><span class="nm">Depart San Jose</span>
               <div class="cue">Exact departure still open — earlier = golden-hour option below. Tank was filled before leaving SJ.</div></td>
             <td class="e">—</td>
           </tr>
           <tr>
             <td class="t">~6:30p</td>
             <td class="b"><span class="nm">Arrive Redding — Motel 6 Redding Central</span>
-              <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Motel+6+Redding+Central+CA">🧭 Navigate</a></td>
-            <td class="e">🔵</td>
+              <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Motel+6+Redding+Central+CA">Navigate</a></td>
+            <td class="e"><span class="dot e4" title="Low energy"></span></td>
           </tr>
           <tr>
             <td class="t">eve</td>
-            <td class="b"><span class="nm">⚪ Optional: Sundial Bridge at golden hour</span>
-              <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sundial+Bridge+Redding+CA">🧭 Navigate</a>
-              <div class="cue warn">⏱ Arrived late/tired? → skip this. Tomorrow is the big day.</div></td>
-            <td class="e">🔵</td>
+            <td class="b"><span class="nm"><span class="chip c-flex">Flex</span> Optional: Sundial Bridge at golden hour</span>
+              <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sundial+Bridge+Redding+CA">Navigate</a>
+              <div class="cue warn">Arrived late/tired? → skip this. Tomorrow is the big day.</div></td>
+            <td class="e"><span class="dot e4" title="Low energy"></span></td>
           </tr>
           <tr>
             <td class="t">dinner</td>
             <td class="b"><span class="nm">Casual dinner — Redding brewery vs quick &amp; cheap (open)</span>
-              <div class="cue">Verified open Fri: <b>Woody's Brewing</b> (11a–10p) or <b>Final Draft Brewing</b> — nav links in Food section. Then early night; Sat departs 8:20a with breakfast packed.</div></td>
-            <td class="e">🔵</td>
+              <div class="cue">Verified open Fri: <b>Woody's Brewing</b> (11a–10p) or <b>Final Draft Brewing</b> — nav links in Food section. Then early night; Sat departs 9:30a with breakfast packed.</div></td>
+            <td class="e"><span class="dot e4" title="Low energy"></span></td>
           </tr>
         </tbody>
       </table></div>
-      <div class="callout">⛽ <b>Fuel up in Redding tonight or before the 8:20a departure</b> — you want a full tank before Lassen.</div>
+      <div class="callout"><b>Fuel up in Redding tonight or before the 9:30a departure</b> — you want a full tank before Lassen.</div>
     </div>
   </details>
 
@@ -489,59 +553,56 @@
       <span class="dnum">18</span>
       <span class="ttl">
         <h2>Sat · Lassen Volcanic NP — full day</h2>
-        <div class="meta">🔴 front-loaded morning → 🔵 lake evening · base: Motel 6 Redding</div>
+        <div class="meta"><span class="dot e1"></span> late 9:30a start · Bumpass + paddle + sunset · base: Motel 6 Redding</div>
       </span>
-      <span class="caret">▶</span>
+      <span class="caret">›</span>
     </summary>
     <div class="body">
       <div class="callout warn">
-        🌦 <b>5,500–10,500 ft:</b> warm layers + rain shell. Afternoon storms possible → hike in the AM.
+        <b>5,500–10,500 ft:</b> warm layers + rain shell. Afternoon storms possible → hike in the AM.
         Fuel in Redding first. Go slow at altitude.
       </div>
       <div class="scroll"><table class="sched">
         <thead><tr><th>Time</th><th>Block</th><th></th></tr></thead>
         <tbody>
-          <tr><td class="t">8:20a</td><td class="b"><span class="nm">🚗 Depart Redding — breakfast packed, eat en route</span> <span class="mk">(drive ~1 hr)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Kohm+Yah-mah-nee+Visitor+Center+Lassen">🧭 SW Entrance</a>
+          <tr><td class="t">9:30a</td><td class="b"><span class="nm">Depart Redding — breakfast packed, eat en route</span> <span class="mk">(drive ~1 hr)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Kohm+Yah-mah-nee+Visitor+Center+Lassen">SW Entrance</a>
             <div class="cue">Late start, adjusted plan — no sit-down breakfast, coffee to go.</div></td><td class="e">—</td></tr>
-          <tr><td class="t">~9:20a</td><td class="b"><span class="nm">Arrive SW entrance — restroom, gear up</span>
-            <div class="cue warn">⚠ Arriving ~9:20a, the <b>Bumpass Hell lot may be FULL</b>. If it is: do <b>Kings Creek Falls first</b> and hit Bumpass midday as the morning crowd clears — or grab a roadside pullout and wait one out.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">~9:40a</td><td class="b"><span class="nm">⚓ Bumpass Hell hike</span> <span class="mk">(~3 mi · 2.5–3 hr, slow at altitude)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bumpass+Hell+Trailhead+Lassen">🧭 Navigate</a>
-            <div class="cue chk">✔ Should be on trail by ~9:40a.</div>
-            <div class="cue warn">⏱ Behind? → ⚪ Kings Creek Falls is now the drop. Bumpass + paddle + sunset are the keepers.</div></td><td class="e">🔴</td></tr>
-          <tr><td class="t">12:30p</td><td class="b"><span class="nm">⏳ Packed lunch at car</span> <span class="mk">(30 min)</span></td><td class="e">🔵</td></tr>
-          <tr><td class="t">1:00p</td><td class="b"><span class="nm">⚪ Kings Creek Falls</span> <span class="mk">(~2.3 mi · ~2 hr — now a FLEX block)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Kings+Creek+Falls+Trailhead+Lassen">🧭 Navigate</a>
-            <div class="cue chk">✔ Should be on trail by ~1:15p to keep the paddle cutoff comfortable.</div>
-            <div class="cue warn">⏱ Behind at all? → drop this hike entirely and roll to Manzanita.</div></td><td class="e">🟠</td></tr>
-          <tr><td class="t">~3:15p</td><td class="b"><span class="nm">🚗 Drive north to Manzanita</span> <span class="mk">(~40 min)</span> · <span class="nm">⚪ Devastated Area</span> <span class="mk">(15 min — only if ahead of schedule)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Devastated+Area+Lassen+Volcanic+National+Park">🧭 Devastated Area</a>
-            <div class="cue warn">⏱ On time or behind? → skip ⚪ Devastated Area, drive straight through.</div></td><td class="e">—</td></tr>
-          <tr><td class="t">~4:00p</td><td class="b"><span class="nm">⚓ Paddle rental — Manzanita Lake</span> <span class="mk">(~1.5–2 hr · rental closes ~5–6p — hours unconfirmed)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Manzanita+Lake+Lassen">🧭 Navigate</a>
-            <div class="cue chk">✔ Should be at the rental by 4:00p.</div>
-            <div class="cue warn">⏱ Rental closed or you're late? → drop it; lakeside + sunset from shore either way.</div></td><td class="e">🟢</td></tr>
-          <tr><td class="t">6:00p</td><td class="b"><span class="nm">⏳ Lakeside cushion: relax / early packed dinner / Loomis Museum</span>
-            <div class="cue">This cushion is the day's main shock absorber — most slippage vanishes here.</div></td><td class="e">🔵</td></tr>
+          <tr><td class="t">~10:30a</td><td class="b"><span class="nm">Arrive SW entrance — restroom, gear up</span>
+            <div class="cue warn"><b>Parking:</b> arriving this late, the <b>Bumpass Hell lot is likely FULL</b>. If it is: drive to <b>Kings Creek Falls first</b> and hit Bumpass in the early afternoon as the lot turns over — or grab a roadside pullout and wait one out.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">~10:45a</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Bumpass Hell hike</span> <span class="mk">(~3 mi · 2.5–3 hr, slow at altitude)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bumpass+Hell+Trailhead+Lassen">Navigate</a>
+            <div class="cue chk">Should be on trail by ~10:45a.</div>
+            <div class="cue warn">Behind? → Bumpass + paddle + sunset are the keepers; everything else gives way.</div></td><td class="e"><span class="dot e1" title="High energy"></span></td></tr>
+          <tr><td class="t">1:30p</td><td class="b"><span class="nm"><span class="chip c-slack">Slack</span> Packed lunch at the car</span> <span class="mk">(30 min)</span></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">2:00p</td><td class="b"><span class="nm">Drive north to Manzanita</span> <span class="mk">(~40 min)</span> · <span class="nm"><span class="chip c-flex">Flex</span> Devastated Area</span> <span class="mk">(15 min — only if ahead)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Devastated+Area+Lassen+Volcanic+National+Park">Devastated Area</a>
+            <div class="cue warn"><b>Kings Creek Falls is dropped by default</b> with the later start — only if you skipped a Bumpass wait or are ahead of schedule. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Kings+Creek+Falls+Trailhead+Lassen">Kings Creek TH</a></div></td><td class="e">—</td></tr>
+          <tr><td class="t">~2:45p</td><td class="b"><span class="nm">Arrive Manzanita Lake</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Manzanita+Lake+Lassen">Navigate</a></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">~3:00p</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Paddle rental — Manzanita Lake</span> <span class="mk">(~1.5–2 hr · rental closes ~5–6p — hours unconfirmed)</span>
+            <div class="cue chk">Should be at the rental by 3:00p.</div>
+            <div class="cue warn">Rental closed or you're late? → drop it; lakeside + sunset from shore either way.</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
+          <tr><td class="t">4:45p</td><td class="b"><span class="nm"><span class="chip c-slack">Slack</span> Lakeside cushion: relax / early packed dinner / Loomis Museum</span>
+            <div class="cue">Big buffer — the day's main shock absorber; most slippage vanishes here.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
           <tr><td class="t">7:45p</td><td class="b"><span class="nm">Position for sunset</span>
-            <div class="cue chk">✔ Be set by 8:15p.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">8:35p</td><td class="b"><span class="nm">⚓ Sunset + alpenglow on Lassen Peak</span>
-            <div class="cue">This one doesn't wait — alpenglow lingers ~15–20 min after.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">8:50p</td><td class="b"><span class="nm">🌌 Stargazing</span> <span class="mk">(~45 min)</span>
-            <div class="cue">Verified great night: 24% crescent (sets 11:06p), Milky Way core emerging in the south. Stretch to ~10:30p for the real show if not too tired — see Stargazing below.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">9:40p</td><td class="b"><span class="nm">🚗 Depart via NW / Hwy 44 → Redding</span> <span class="mk">(~50 min)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Motel+6+Redding+Central+CA">🧭 Motel 6</a></td><td class="e">—</td></tr>
-          <tr><td class="t">~10:30p</td><td class="b"><span class="nm">Back at Motel 6 — sleep by 12</span></td><td class="e">🔵</td></tr>
+            <div class="cue chk">Be set by 8:15p.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">8:35p</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Sunset + alpenglow on Lassen Peak</span>
+            <div class="cue">This one doesn't wait — alpenglow lingers ~15–20 min after.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">8:50p</td><td class="b"><span class="nm">Stargazing</span> <span class="mk">(~45 min)</span>
+            <div class="cue">Verified great night: 24% crescent (sets 11:06p), Milky Way core emerging in the south. Stretch to ~10:30p for the real show if not too tired — see Stargazing below.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">9:40p</td><td class="b"><span class="nm">Depart via NW / Hwy 44 → Redding</span> <span class="mk">(~50 min)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Motel+6+Redding+Central+CA">Motel 6</a></td><td class="e">—</td></tr>
+          <tr><td class="t">~10:30p</td><td class="b"><span class="nm">Back at Motel 6 — sleep by 12</span></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
         </tbody>
       </table></div>
 
       <h3>Swaps</h3>
       <ul>
-        <li><b>Hard mode:</b> Lassen Peak summit (~5 mi, ~2,000 ft gain) replaces Kings Creek — pushes lunch later; keep the cushion.</li>
-        <li><b>Relaxed mode:</b> drop Kings Creek → easy Manzanita loop (1.8 mi) + more lake time.</li>
+        <li><b>Ahead of schedule:</b> add <b>Kings Creek Falls</b> back (~2.3 mi · ~2 hr, after lunch) — it's the block the late start cut.</li>
+        <li><b>Relaxed mode:</b> easy Manzanita Lake loop (1.8 mi) + more lakeside time instead of any second stop.</li>
       </ul>
-      <div class="callout">☑ <b>Still to confirm:</b> Manzanita paddle-rental hours · Lassen entrance fee/pass (~$30/vehicle, 7-day).</div>
+      <div class="callout"><b>Still to confirm:</b> Manzanita paddle-rental hours · Lassen entrance fee/pass (~$30/vehicle, 7-day).</div>
     </div>
   </details>
 
@@ -551,50 +612,50 @@
       <span class="dnum">19</span>
       <span class="ttl">
         <h2>Sun · Mt Shasta (light) → Eureka</h2>
-        <div class="meta">🟠 dawn fishing + travel + settle · 5:45a start · Hwy 299 = 55 hairpins</div>
+        <div class="meta"><span class="dot e2"></span> dawn fishing + travel + settle · 5:45a start · Hwy 299 = 55 hairpins</div>
       </span>
-      <span class="caret">▶</span>
+      <span class="caret">›</span>
     </summary>
     <div class="body">
-      <div class="callout warn">🤢 <b>Hwy 299 is winding — 55 hairpins to Weaverville.</b> Dramamine before Redding if prone. Top off gas in Redding: few stations on 299. Before departing, check Caltrans QuickMap (quickmap.dot.ca.gov · 1-800-427-7623) for one-way construction controls. Passenger: read the Hwy 299 gold-rush card en route.</div>
-      <div class="callout anchor">🌿 <b>9:00a ⚓ — first Fern Canyon permit grab.</b> 100 day-before permits open at 9:00 sharp and fill in minutes. Alarm is on the ICS below. Have the site loaded before 9.</div>
-      <div class="callout">🎣 <b>New — Shasta Lake dawn fishing</b> slots in before Mt Shasta (5:45a start). Your rods' water: bass + panfish from shore. Full rig notes in the Fishing guide.</div>
+      <div class="callout warn"><b>Hwy 299 is winding — 55 hairpins to Weaverville.</b> Dramamine before Redding if prone. Top off gas in Redding: few stations on 299. Before departing, check Caltrans QuickMap (quickmap.dot.ca.gov · 1-800-427-7623) for one-way construction controls. Passenger: read the Hwy 299 gold-rush card en route.</div>
+      <div class="callout anchor"><b>9:00a <span class="chip c-anchor">Anchor</span> — first Fern Canyon permit grab.</b> 100 day-before permits open at 9:00 sharp and fill in minutes. Alarm is on the ICS below. Have the site loaded before 9.</div>
+      <div class="callout"><b>New — Shasta Lake dawn fishing</b> slots in before Mt Shasta (5:45a start). Your rods' water: bass + panfish from shore. Full rig notes in the Fishing guide.</div>
       <div class="scroll"><table class="sched">
         <thead><tr><th>Time</th><th>Block</th><th></th></tr></thead>
         <tbody>
           <tr><td class="t">5:45a</td><td class="b"><span class="nm">Wake, quick coffee, load &amp; check out</span> <span class="mk">(bring the gear)</span>
-            <div class="cue warn">😴 Short night after Lassen — rather sleep in? Skip the fishing and run the original 7:00a start; Eureka still lands ~4:15p.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">6:00a</td><td class="b"><span class="nm">⚓ Check out Motel 6 → I-5 north to Shasta Lake</span> <span class="mk">(~15–20 min)</span></td><td class="e">—</td></tr>
-          <tr><td class="t">6:20a</td><td class="b"><span class="nm">🎣 Shasta Lake — dawn shore session</span> <span class="mk">(~1.5 hr)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bridge+Bay+Resort+Shasta+Lake+CA">🧭 Bridge Bay (off I-5)</a>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lakeshore+Drive+Lakehead+CA">🧭 Lakehead / Lakeshore Dr</a>
-            <div class="cue">Your rods' home turf: <b>bass on the spinning rod</b>, <b>bluegill/crappie on the ultralight</b>; Garmin Cast to find the drop-off. Dawn = prime bite; work rocky points &amp; coves. Shore access right off I-5. <b>CA license required</b> — a 2-day covers today + optional Manzanita.</div></td><td class="e">🟢</td></tr>
-          <tr><td class="t">7:50a</td><td class="b"><span class="nm">🚗 Pack up, continue north to Mt Shasta City</span> <span class="mk">(~40 min)</span></td><td class="e">—</td></tr>
-          <tr><td class="t">8:30a</td><td class="b"><span class="nm">Arrive Mount Shasta City</span></td><td class="e">🔵</td></tr>
+            <div class="cue warn">Short night after Lassen — rather sleep in? Skip the fishing and run the original 7:00a start; Eureka still lands ~4:15p.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">6:00a</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Check out Motel 6 → I-5 north to Shasta Lake</span> <span class="mk">(~15–20 min)</span></td><td class="e">—</td></tr>
+          <tr><td class="t">6:20a</td><td class="b"><span class="nm">Shasta Lake — dawn shore session</span> <span class="mk">(~1.5 hr)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bridge+Bay+Resort+Shasta+Lake+CA">Bridge Bay (off I-5)</a>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lakeshore+Drive+Lakehead+CA">Lakehead / Lakeshore Dr</a>
+            <div class="cue">Your rods' home turf: <b>bass on the spinning rod</b>, <b>bluegill/crappie on the ultralight</b>; Garmin Cast to find the drop-off. Dawn = prime bite; work rocky points &amp; coves. Shore access right off I-5. <b>CA license required</b> — a 2-day covers today + optional Manzanita.</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
+          <tr><td class="t">7:50a</td><td class="b"><span class="nm">Pack up, continue north to Mt Shasta City</span> <span class="mk">(~40 min)</span></td><td class="e">—</td></tr>
+          <tr><td class="t">8:30a</td><td class="b"><span class="nm">Arrive Mount Shasta City</span></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
           <tr><td class="t">9:00a</td><td class="b"><span class="nm">Sacramento River headwaters spring — City Park</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mount+Shasta+City+Park+headwaters">🧭 Navigate</a>
-            <div class="cue">Fill your bottles — famously pure. Also: grab the Fern Canyon permit at 9:00 sharp (see above).</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">9:30a</td><td class="b"><span class="nm">⚪ Lake Siskiyou — classic Shasta reflection view</span> <span class="mk">(short stroll / photos)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lake+Siskiyou+Mount+Shasta+CA">🧭 Navigate</a>
-            <div class="cue warn">⏱ Behind? → trim this stroll to a viewpoint stop.</div></td><td class="e">🟢</td></tr>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mount+Shasta+City+Park+headwaters">Navigate</a>
+            <div class="cue">Fill your bottles — famously pure. Also: grab the Fern Canyon permit at 9:00 sharp (see above).</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">9:30a</td><td class="b"><span class="nm"><span class="chip c-flex">Flex</span> Lake Siskiyou — classic Shasta reflection view</span> <span class="mk">(short stroll / photos)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lake+Siskiyou+Mount+Shasta+CA">Navigate</a>
+            <div class="cue warn">Behind? → trim this stroll to a viewpoint stop.</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
           <tr><td class="t">10:15a</td><td class="b"><span class="nm">Breakfast/coffee — downtown Mt Shasta City</span>
-            <div class="cue">Verified: <b>Seven Suns Coffee &amp; Café</b> (daily 6a–2p) fits this slot easily; <b>The Oven Bakery</b> for a sourdough loaf for the week.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">11:00a</td><td class="b"><span class="nm">🚗 Depart south → Redding</span> <span class="mk">(~1 hr)</span></td><td class="e">—</td></tr>
+            <div class="cue">Verified: <b>Seven Suns Coffee &amp; Café</b> (daily 6a–2p) fits this slot easily; <b>The Oven Bakery</b> for a sourdough loaf for the week.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">11:00a</td><td class="b"><span class="nm">Depart south → Redding</span> <span class="mk">(~1 hr)</span></td><td class="e">—</td></tr>
           <tr><td class="t">12:00p</td><td class="b"><span class="nm">Redding: top off gas + quick lunch / road snacks</span>
-            <div class="cue chk">✔ Should be leaving Redding on 299 by 12:45p.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">12:45p</td><td class="b"><span class="nm">🚗 West on Hwy 299 toward Eureka</span> <span class="mk">(~3–3.5 hr · dead zone — no signal)</span></td><td class="e">—</td></tr>
-          <tr><td class="t">~2:00p</td><td class="b"><span class="nm">⚪ Optional leg-stretch / photo pullout — Trinity River</span>
-            <div class="cue warn">⏱ Behind? → skip; plenty of coast ahead.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">~4:15p</td><td class="b"><span class="nm">Arrive Eureka</span></td><td class="e">🔵</td></tr>
+            <div class="cue chk">Should be leaving Redding on 299 by 12:45p.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">12:45p</td><td class="b"><span class="nm">West on Hwy 299 toward Eureka</span> <span class="mk">(~3–3.5 hr · dead zone — no signal)</span></td><td class="e">—</td></tr>
+          <tr><td class="t">~2:00p</td><td class="b"><span class="nm"><span class="chip c-flex">Flex</span> Optional leg-stretch / photo pullout — Trinity River</span>
+            <div class="cue warn">Behind? → skip; plenty of coast ahead.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">~4:15p</td><td class="b"><span class="nm">Arrive Eureka</span></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
           <tr><td class="t">4:30p</td><td class="b"><span class="nm">Walmart run — kitchen essentials + week groceries</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Walmart+Eureka+CA">🧭 Navigate</a>
-            <div class="cue">Oil, salt/pepper, coffee, staples + 4–5 simple dinners (see Food below).</div></td><td class="e">🟢</td></tr>
-          <tr><td class="t">5:30p</td><td class="b"><span class="nm">⚓ Airbnb check-in — Eureka (address in your booking)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Eureka+CA">🧭 Navigate</a>
-            <div class="cue">Unload, settle, verify wifi + desk for Monday work.</div></td><td class="e">🔵</td></tr>
-          <tr><td class="t">6:30p</td><td class="b"><span class="nm">Cook-in first dinner</span></td><td class="e">🔵</td></tr>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Walmart+Eureka+CA">Navigate</a>
+            <div class="cue">Oil, salt/pepper, coffee, staples + 4–5 simple dinners (see Food below).</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
+          <tr><td class="t">5:30p</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Airbnb check-in — Eureka (address in your booking)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Eureka+CA">Navigate</a>
+            <div class="cue">Unload, settle, verify wifi + desk for Monday work.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
+          <tr><td class="t">6:30p</td><td class="b"><span class="nm">Cook-in first dinner</span></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
           <tr><td class="t">eve</td><td class="b"><span class="nm">Relax · light Monday-work prep · early night</span>
-            <div class="cue">Settle-only tonight — no activity, by design.</div></td><td class="e">🔵</td></tr>
+            <div class="cue">Settle-only tonight — no activity, by design.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
         </tbody>
       </table></div>
       <p class="sub">Weaverville stop skipped — the Shasta detour won.</p>
@@ -607,46 +668,46 @@
       <span class="dnum">20<span style="font-size:.8rem">–23</span></span>
       <span class="ttl">
         <h2>Mon–Thu · Eureka workation evenings</h2>
-        <div class="meta">work → ⚓ free 4:00p → sunset ~8:35p · 🔵→🟢 evenings</div>
+        <div class="meta">work → free 4:00p → sunset ~8:35p · <span class="dot e3"></span> easy evenings</div>
       </span>
-      <span class="caret">▶</span>
+      <span class="caret">›</span>
     </summary>
     <div class="body">
       <div class="callout anchor">
-        💼 <b>Work hours (⚓ every weekday):</b> A 7:30a–4:00p PT · B 7:00a–3:00p PT (10a–6p ET).
+        <b>Work hours (<span class="chip c-anchor">Anchor</span> every weekday):</b> A 7:30a–4:00p PT · B 7:00a–3:00p PT (10a–6p ET).
         <b>B solo 3–4p</b> (optional pier fishing) · <b>shared free time starts 4:00p</b> · out until ~10p is fine <em>on the coast only</em> (gate rule below).
       </div>
       <div class="callout warn">
-        🚧 <b>Gate rule (verified):</b> Newton B. Drury Parkway gates <b>sunset→sunrise</b> (north of Elk Prairie).
+        <b>Gate rule (verified):</b> Newton B. Drury Parkway gates <b>sunset→sunrise</b> (north of Elk Prairie).
         Actual sunsets this week are <b>8:43–8:45p</b> — work to the plan's 8:35p and keep the extra minutes as buffer.
         Park at the Elk Prairie visitor-center day-use lot if hiking to dusk.
         <b>Sunset = go coastal</b> (Klamath Overlook / Trinidad), not deep in the grove.
         Davison Rd (Gold Bluffs / Fern Canyon) evening hours: confirm by phone <span style="white-space:nowrap">707-464-6101</span>.
       </div>
-      <div class="callout anchor">🌿 <b>9:00a ⚓ Mon–Thu — Fern Canyon permit grabs</b> (until one lands). Alarms on the ICS. If a permit lands early in the week, the big-hike day may shift — delete leftover alarms.</div>
+      <div class="callout anchor"><b>9:00a <span class="chip c-anchor">Anchor</span> Mon–Thu — Fern Canyon permit grabs</b> (until one lands). Alarms on the ICS. If a permit lands early in the week, the big-hike day may shift — delete leftover alarms.</div>
 
       <div class="scroll"><table class="sched">
         <thead><tr><th>Day</th><th>Evening plan (adjust freely — permits may override)</th><th></th></tr></thead>
         <tbody>
           <tr><td class="t">Mon 20</td><td class="b"><span class="nm">Old Town Eureka</span> <span class="mk">— light, in-town; good after Sunday's long drive</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Old+Town+Eureka+CA">🧭 Old Town</a>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Del+Norte+Street+Pier+Eureka+CA">🧭 Del Norte Pier</a>
-            <div class="cue">Pier fishing = no license needed; tide floods 3:00–5:30p (B's solo slot works). Dinner note: Six Rivers &amp; LC Taproom closed Mondays → <b>Lost Coast Café</b> is the reliable choice. Living the Dream Ice Cream for the boardwalk walk.</div></td><td class="e">🔵</td></tr>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Old+Town+Eureka+CA">Old Town</a>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Del+Norte+Street+Pier+Eureka+CA">Del Norte Pier</a>
+            <div class="cue">Pier fishing = no license needed; tide floods 3:00–5:30p (B's solo slot works). Dinner note: Six Rivers &amp; LC Taproom closed Mondays → <b>Lost Coast Café</b> is the reliable choice. Living the Dream Ice Cream for the boardwalk walk.</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
           <tr><td class="t">Tue 21</td><td class="b"><span class="nm">Prairie Creek hike → Klamath River Overlook sunset</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Prairie+Creek+Redwoods+Visitor+Center">🧭 Elk Prairie VC</a>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Klamath+River+Overlook">🧭 Klamath Overlook</a>
-            <div class="cue chk">✔ Leave Eureka right at 4p (drive ~1 hr) → on trail ~5:15p.</div>
-            <div class="cue warn">⏱ Out of the Drury Parkway before 8:35p sunset ⚓ — watch the clock in the grove.</div></td><td class="e">🟢</td></tr>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Prairie+Creek+Redwoods+Visitor+Center">Elk Prairie VC</a>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Klamath+River+Overlook">Klamath Overlook</a>
+            <div class="cue chk">Leave Eureka right at 4p (drive ~1 hr) → on trail ~5:15p.</div>
+            <div class="cue warn">Out of the Drury Parkway before the 8:35p sunset — watch the clock in the grove.</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
           <tr><td class="t">Wed 22</td><td class="b"><span class="nm">Trinidad — coast + sunset (no gate)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Trinidad+Head+Trinidad+CA">🧭 Trinidad Head</a>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Trinidad+Head+Trinidad+CA">Trinidad Head</a>
             <div class="cue">Trinidad Head loop 1.4 mi · State Beach · College Cove. No gate — linger past sunset (8:44p).</div>
-            <div class="cue chk">🎣 Week's best surfperch tide: flood 4–7p ★ — bring the rod. Six Rivers Brewery (10 min away) is open Wed.</div></td><td class="e">🟢</td></tr>
+            <div class="cue chk">Week's best surfperch tide: flood 4–7p ★ — bring the rod. Six Rivers Brewery (10 min away) is open Wed.</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
           <tr><td class="t">Thu 23</td><td class="b"><span class="nm">Prairie Creek hike → coastal sunset</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Prairie+Creek+Redwoods+Visitor+Center">🧭 Elk Prairie VC</a>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lady+Bird+Johnson+Grove+Trailhead">🧭 Lady Bird Grove</a>
-            <div class="cue chk">✔ Leave Eureka right at 4p → on trail ~5:15p.</div>
-            <div class="cue warn">⏱ Same gate rule — coastal for sunset, not the grove.</div>
-            <div class="cue chk">🎣 Other top tide: flood 4–7:45p ★ — a jetty/beach session works instead of the hike.</div></td><td class="e">🟢</td></tr>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Prairie+Creek+Redwoods+Visitor+Center">Elk Prairie VC</a>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lady+Bird+Johnson+Grove+Trailhead">Lady Bird Grove</a>
+            <div class="cue chk">Leave Eureka right at 4p → on trail ~5:15p.</div>
+            <div class="cue warn">Same gate rule — coastal for sunset, not the grove.</div>
+            <div class="cue chk">Other top tide: flood 4–7:45p ★ — a jetty/beach session works instead of the hike.</div></td><td class="e"><span class="dot e3" title="Medium energy"></span></td></tr>
         </tbody>
       </table></div>
 
@@ -665,24 +726,24 @@
       <span class="dnum">24</span>
       <span class="ttl">
         <h2>Fri · Prairie Creek — the big block</h2>
-        <div class="meta">🔴 crown-jewel hike · ⚓ both off work at 12:00p · daylight until ~8:35p</div>
+        <div class="meta"><span class="dot e1"></span> crown-jewel hike · both off work at 12:00p · daylight until ~8:35p</div>
       </span>
-      <span class="caret">▶</span>
+      <span class="caret">›</span>
     </summary>
     <div class="body">
       <p>Your one long free daylight stretch. Prairie Creek is ~1 hr north of the Airbnb.</p>
       <div class="scroll"><table class="sched">
         <thead><tr><th>Time</th><th>Block</th><th></th></tr></thead>
         <tbody>
-          <tr><td class="t">12:00p</td><td class="b"><span class="nm">⚓ Both off work — grab packed lunch, roll north</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Prairie+Creek+Redwoods+Visitor+Center">🧭 Elk Prairie VC</a>
-            <div class="cue chk">✔ On the road by ~12:30p → on trail by ~1:30–2:00p for the 8-miler.</div></td><td class="e">—</td></tr>
-          <tr><td class="t">~1:30p</td><td class="b"><span class="nm">⚓ Default: James Irvine → Fern Canyon → Miners Ridge loop</span> <span class="mk">(~8–10 mi, prime old-growth → fern-walled canyon)</span>
-            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fern+Canyon+Trailhead+Gold+Bluffs+Beach">🧭 Fern Canyon TH</a>
-            <div class="cue warn">🌿 Needs the Fern Canyon / Gold Bluffs day-use permit — $12 cash/check at kiosk (no cards), permit-holder in car with photo ID.</div>
-            <div class="cue warn">⏱ No permit / short on time? → fallbacks below.</div></td><td class="e">🔴</td></tr>
-          <tr><td class="t">eve</td><td class="b"><span class="nm">🎉 Celebrate dinner out — big hike done</span>
-            <div class="cue warn">⏱ Brick &amp; Fire's kitchen closes 8:30p and the hike runs to ~sunset (8:42p) — finish by ~7p and reserve, or default to <b>Lost Coast Café</b> (open later, every night).</div></td><td class="e">🔵</td></tr>
+          <tr><td class="t">12:00p</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Both off work — grab packed lunch, roll north</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Prairie+Creek+Redwoods+Visitor+Center">Elk Prairie VC</a>
+            <div class="cue chk">On the road by ~12:30p → on trail by ~1:30–2:00p for the 8-miler.</div></td><td class="e">—</td></tr>
+          <tr><td class="t">~1:30p</td><td class="b"><span class="nm"><span class="chip c-anchor">Anchor</span> Default: James Irvine → Fern Canyon → Miners Ridge loop</span> <span class="mk">(~8–10 mi, prime old-growth → fern-walled canyon)</span>
+            <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fern+Canyon+Trailhead+Gold+Bluffs+Beach">Fern Canyon TH</a>
+            <div class="cue warn">Needs the Fern Canyon / Gold Bluffs day-use permit — $12 cash/check at kiosk (no cards), permit-holder in car with photo ID.</div>
+            <div class="cue warn">No permit / short on time? → fallbacks below.</div></td><td class="e"><span class="dot e1" title="High energy"></span></td></tr>
+          <tr><td class="t">eve</td><td class="b"><span class="nm">Celebrate dinner out — big hike done</span>
+            <div class="cue warn">Brick &amp; Fire's kitchen closes 8:30p and the hike runs to ~sunset (8:42p) — finish by ~7p and reserve, or default to <b>Lost Coast Café</b> (open later, every night).</div></td><td class="e"><span class="dot e4" title="Low energy"></span></td></tr>
         </tbody>
       </table></div>
       <h3>Alternatives</h3>
@@ -701,9 +762,9 @@
       <span class="dnum">25</span>
       <span class="ttl">
         <h2>Sat · Return home via Hwy 1 <span class="badge-tbd">TBD</span></h2>
-        <div class="meta">🔴 long drive · pending lodging decision — 1 long day vs 2 days w/ coast overnight</div>
+        <div class="meta"><span class="dot e1"></span> long drive · pending lodging decision — 1 long day vs 2 days w/ coast overnight</div>
       </span>
-      <span class="caret">▶</span>
+      <span class="caret">›</span>
     </summary>
     <div class="body">
       <div class="callout"><span class="badge-tbd">Placeholder</span> &nbsp;No times here yet — nothing below is scheduled. The route locks once the overnight question is settled.</div>
@@ -714,16 +775,16 @@
         <li>→ Bodega Bay → SF → San Jose</li>
       </ul>
       <p><b>Open question:</b> overnight around Mendocino / Fort Bragg (books up in summer, ≈ $150–350) or push through in one long day (~8–10+ hr).</p>
-      <p class="sub">⛽ Few gas stations on the Leggett–Fort Bragg stretch — fill before leaving 101. Maps links land here once the route is settled.</p>
+      <p class="sub">Few gas stations on the Leggett–Fort Bragg stretch — fill before leaving 101. Maps links land here once the route is settled.</p>
     </div>
   </details>
 
   <!-- ================= CALENDAR / ICS ================= -->
   <section class="block" id="calendar">
-    <h2>📅 Trip calendar (ICS)</h2>
+    <h2>Trip calendar (ICS)</h2>
     <p class="sub">The static ICS is the offline alarm engine — it fires in dead zones. Import into a <b>dedicated "NorCal Trip" calendar</b> on both phones so you can clear + reimport cleanly after a republish.</p>
     <p style="margin:.9rem 0">
-      <button class="btn" id="ics-btn" type="button">⬇ Download updated calendar</button>
+      <button class="btn" id="ics-btn" type="button">Download updated calendar</button>
     </p>
     <p class="sub" id="ics-note">One merged download, two calendars inside: <b>Fern Canyon permit alarms</b> (daily 9:00a grabs, Sun 7/19 → Thu 7/23) + the <b>main itinerary v1</b> (sunset/stargazing, checkouts, Hwy 299 leg, evening free-time nudges, big-hike day).</p>
     <ul class="sub">
@@ -735,27 +796,27 @@
 
   <!-- ================= FINANCES ================= -->
   <section class="block" id="finances">
-    <h2>💵 Finances</h2>
+    <h2>Finances</h2>
     <p class="sub"><b>Split:</b> 50/50 default, per-item override available (e.g. different restaurant dishes). Split clock <b>starts Jul 18</b>. Hotels + the SJ→Redding tank are prepaid and excluded.</p>
     <p style="margin:.9rem 0">
-      <a class="btn ghost" id="sheet-btn" role="button" aria-disabled="true" title="Link coming from the Finance track">📊 Open finance sheet <span class="badge-tbd" style="text-transform:none">link pending</span></a>
+      <a class="btn ghost" id="sheet-btn" role="button" aria-disabled="true" title="Link coming from the Finance track">Open finance sheet <span class="badge-tbd" style="text-transform:none">link pending</span></a>
     </p>
     <p class="sub">The live Google Sheet (Log · Budget · Summary, auto who-owes-whom) is being built by the Finance track — the button goes live on the next republish.</p>
 
     <h3>Three budget tiers — per couple, Jul 18–25 (variable spend)</h3>
-    <p class="sub">Assumes Elantra ~30 mpg · CA gas ~$5/gal · ~1,200–1,400 mi from Jul 18 · 2 people. ⭐ Comfortable is the working default.</p>
+    <p class="sub">Assumes Elantra ~30 mpg · CA gas ~$5/gal · ~1,200–1,400 mi from Jul 18 · 2 people. Comfortable is the working default.</p>
     <div class="scroll"><table class="data">
-      <thead><tr><th>Line</th><th>🟢 Thrifty</th><th class="star">🔵 Comfortable ⭐</th><th>🟣 Indulgent</th></tr></thead>
+      <thead><tr><th>Line</th><th>Thrifty</th><th class="star">Comfortable</th><th>Indulgent</th></tr></thead>
       <tbody>
-        <tr><td>Gas</td><td class="num">$220</td><td class="num star">$240</td><td class="num">$260</td></tr>
-        <tr><td>Groceries (cook-in)</td><td class="num">$150</td><td class="num star">$170</td><td class="num">$180</td></tr>
-        <tr><td>Restaurants / treats</td><td class="num">$120 <span class="sub">(3 cheap)</span></td><td class="num star">$450 <span class="sub">(5–6, some nicer)</span></td><td class="num">$900 <span class="sub">(mostly out)</span></td></tr>
-        <tr><td>Park fees + Fern Canyon</td><td class="num">$55</td><td class="num star">$70</td><td class="num">$80</td></tr>
-        <tr><td>Fishing licenses + bait</td><td class="num">$60 <span class="sub">(short/shared)</span></td><td class="num star">$120 <span class="sub">(2-day each)</span></td><td class="num">$150 <span class="sub">(premium)</span></td></tr>
-        <tr><td>Paddle + activities</td><td class="num">$30</td><td class="num star">$110</td><td class="num">$250</td></tr>
-        <tr><td>Buffer</td><td class="num">$65</td><td class="num star">$150</td><td class="num">$200</td></tr>
-        <tr class="total"><td>TOTAL</td><td class="num">~$700</td><td class="num star">~$1,050</td><td class="num">~$2,020</td></tr>
-        <tr><td>Per person</td><td class="num">~$350</td><td class="num star">~$525</td><td class="num">~$1,010</td></tr>
+        <tr><td>Gas</td><td class="num" data-label="Thrifty">$220</td><td class="num star" data-label="Comfortable">$240</td><td class="num" data-label="Indulgent">$260</td></tr>
+        <tr><td>Groceries (cook-in)</td><td class="num" data-label="Thrifty">$150</td><td class="num star" data-label="Comfortable">$170</td><td class="num" data-label="Indulgent">$180</td></tr>
+        <tr><td>Restaurants / treats</td><td class="num" data-label="Thrifty">$120 <span class="sub">(3 cheap)</span></td><td class="num star" data-label="Comfortable">$450 <span class="sub">(5–6, some nicer)</span></td><td class="num" data-label="Indulgent">$900 <span class="sub">(mostly out)</span></td></tr>
+        <tr><td>Park fees + Fern Canyon</td><td class="num" data-label="Thrifty">$55</td><td class="num star" data-label="Comfortable">$70</td><td class="num" data-label="Indulgent">$80</td></tr>
+        <tr><td>Fishing licenses + bait</td><td class="num" data-label="Thrifty">$60 <span class="sub">(short/shared)</span></td><td class="num star" data-label="Comfortable">$120 <span class="sub">(2-day each)</span></td><td class="num" data-label="Indulgent">$150 <span class="sub">(premium)</span></td></tr>
+        <tr><td>Paddle + activities</td><td class="num" data-label="Thrifty">$30</td><td class="num star" data-label="Comfortable">$110</td><td class="num" data-label="Indulgent">$250</td></tr>
+        <tr><td>Buffer</td><td class="num" data-label="Thrifty">$65</td><td class="num star" data-label="Comfortable">$150</td><td class="num" data-label="Indulgent">$200</td></tr>
+        <tr class="total"><td>TOTAL</td><td class="num" data-label="Thrifty">~$700</td><td class="num star" data-label="Comfortable">~$1,050</td><td class="num" data-label="Indulgent">~$2,020</td></tr>
+        <tr><td>Per person</td><td class="num" data-label="Thrifty">~$350</td><td class="num star" data-label="Comfortable">~$525</td><td class="num" data-label="Indulgent">~$1,010</td></tr>
       </tbody>
     </table></div>
     <p class="sub"><b>Add-on (any tier):</b> return-leg overnight (Mendocino / Fort Bragg) ≈ $150–350 — deferred, not in the totals.</p>
@@ -764,47 +825,47 @@
 
   <!-- ================= TIMING INTEL ================= -->
   <section class="block" id="timing">
-    <h2>⏰ Timing intel</h2>
+    <h2>Timing intel</h2>
     <p class="sub">Verified (sunrise-sunset.org + USNO; NOAA-derived tide predictions). All times PDT.</p>
 
     <h3>Sun — Sat 7/18, Redding &amp; Lassen</h3>
-    <div class="scroll"><table class="data" style="min-width:26rem">
+    <div class="scroll"><table class="data">
       <thead><tr><th>Location</th><th>Sunrise</th><th>Sunset</th><th>Civil twilight ends</th><th>Golden hour (PM)</th></tr></thead>
       <tbody>
-        <tr><td>Redding</td><td class="num">5:53a</td><td class="num">8:39p</td><td class="num">9:09p</td><td class="num">~7:40–8:39p</td></tr>
-        <tr><td>Manzanita Lake</td><td class="num">5:50a</td><td class="num"><b>8:35p</b></td><td class="num">9:06p</td><td class="num">~7:35–8:35p</td></tr>
+        <tr><td>Redding</td><td class="num" data-label="Sunrise">5:53a</td><td class="num" data-label="Sunset">8:39p</td><td class="num" data-label="Civil twilight ends">9:09p</td><td class="num" data-label="Golden hour (PM)">~7:40–8:39p</td></tr>
+        <tr><td>Manzanita Lake</td><td class="num" data-label="Sunrise">5:50a</td><td class="num" data-label="Sunset"><b>8:35p</b></td><td class="num" data-label="Civil twilight ends">9:06p</td><td class="num" data-label="Golden hour (PM)">~7:35–8:35p</td></tr>
       </tbody>
     </table></div>
     <p class="sub">Alpenglow on Lassen Peak lingers ~15–20 min past sunset — the 8:35p anchor checks out. Full astronomical dark for stars: <b>10:31p</b>. Morning golden hour ~5:50–6:50a.</p>
 
     <h3>Sun — Eureka week (Jul 19–25)</h3>
-    <div class="scroll"><table class="data" style="min-width:26rem">
+    <div class="scroll"><table class="data">
       <thead><tr><th>Date</th><th>Sunrise</th><th>Sunset</th><th>Civil twilight ends</th><th>Golden hour (PM)</th></tr></thead>
       <tbody>
-        <tr><td>Sun 7/19</td><td class="num">6:00a</td><td class="num">8:46p</td><td class="num">9:16p</td><td class="num">~7:45–8:46p</td></tr>
-        <tr><td>Mon 7/20</td><td class="num">6:01a</td><td class="num">8:45p</td><td class="num">9:15p</td><td class="num">~7:45–8:45p</td></tr>
-        <tr><td>Tue 7/21</td><td class="num">6:02a</td><td class="num">8:44p</td><td class="num">9:15p</td><td class="num">~7:45–8:44p</td></tr>
-        <tr><td>Wed 7/22</td><td class="num">6:03a</td><td class="num">8:44p</td><td class="num">9:14p</td><td class="num">~7:45–8:44p</td></tr>
-        <tr><td>Thu 7/23</td><td class="num">6:04a</td><td class="num">8:43p</td><td class="num">9:13p</td><td class="num">~7:40–8:43p</td></tr>
-        <tr><td>Fri 7/24</td><td class="num">6:05a</td><td class="num">8:42p</td><td class="num">9:12p</td><td class="num">~7:40–8:42p</td></tr>
-        <tr><td>Sat 7/25</td><td class="num">6:06a</td><td class="num">8:41p</td><td class="num">9:11p</td><td class="num">~7:40–8:41p</td></tr>
+        <tr><td>Sun 7/19</td><td class="num" data-label="Sunrise">6:00a</td><td class="num" data-label="Sunset">8:46p</td><td class="num" data-label="Civil twilight ends">9:16p</td><td class="num" data-label="Golden hour (PM)">~7:45–8:46p</td></tr>
+        <tr><td>Mon 7/20</td><td class="num" data-label="Sunrise">6:01a</td><td class="num" data-label="Sunset">8:45p</td><td class="num" data-label="Civil twilight ends">9:15p</td><td class="num" data-label="Golden hour (PM)">~7:45–8:45p</td></tr>
+        <tr><td>Tue 7/21</td><td class="num" data-label="Sunrise">6:02a</td><td class="num" data-label="Sunset">8:44p</td><td class="num" data-label="Civil twilight ends">9:15p</td><td class="num" data-label="Golden hour (PM)">~7:45–8:44p</td></tr>
+        <tr><td>Wed 7/22</td><td class="num" data-label="Sunrise">6:03a</td><td class="num" data-label="Sunset">8:44p</td><td class="num" data-label="Civil twilight ends">9:14p</td><td class="num" data-label="Golden hour (PM)">~7:45–8:44p</td></tr>
+        <tr><td>Thu 7/23</td><td class="num" data-label="Sunrise">6:04a</td><td class="num" data-label="Sunset">8:43p</td><td class="num" data-label="Civil twilight ends">9:13p</td><td class="num" data-label="Golden hour (PM)">~7:40–8:43p</td></tr>
+        <tr><td>Fri 7/24</td><td class="num" data-label="Sunrise">6:05a</td><td class="num" data-label="Sunset">8:42p</td><td class="num" data-label="Civil twilight ends">9:12p</td><td class="num" data-label="Golden hour (PM)">~7:40–8:42p</td></tr>
+        <tr><td>Sat 7/25</td><td class="num" data-label="Sunrise">6:06a</td><td class="num" data-label="Sunset">8:41p</td><td class="num" data-label="Civil twilight ends">9:11p</td><td class="num" data-label="Golden hour (PM)">~7:40–8:41p</td></tr>
       </tbody>
     </table></div>
     <p class="sub">Actual Eureka sunsets run <b>8:41–8:46p</b> — the plan's "~8:35p" is ~7–10 min conservative, which is exactly the buffer you want for the Drury Parkway gate. Free at 4p → ~4.5 hr of daylight + ~30 min usable twilight every evening. For Klamath Overlook / Trinidad sunsets, be in position by <b>~8:15p</b>.</p>
 
     <h3>Tides — Humboldt Bay (North Spit, Jul 20–25)</h3>
-    <div class="scroll"><table class="data" style="min-width:34rem">
+    <div class="scroll"><table class="data">
       <thead><tr><th>Date</th><th>Midday low</th><th>Evening high</th><th>Evening incoming window — fish this</th></tr></thead>
       <tbody>
-        <tr><td>Mon 7/20</td><td class="num">10:45a (1.3)</td><td class="num">5:30p (6.6)</td><td>3:00–5:30p <span class="sub">(B's 3–4p solo slot works; outgoing after 5:30)</span></td></tr>
-        <tr><td>Tue 7/21</td><td class="num">11:28a (2.1)</td><td class="num">6:13p (6.6)</td><td>4:00–6:15p</td></tr>
-        <tr><td>Wed 7/22</td><td class="num">12:17p (2.9)</td><td class="num">6:59p (6.6)</td><td><b>4:00–7:00p ★</b></td></tr>
-        <tr><td>Thu 7/23</td><td class="num">1:16p (3.4)</td><td class="num">7:48p (6.6)</td><td><b>4:00–7:45p ★</b></td></tr>
-        <tr><td>Fri 7/24</td><td class="num">2:22p (3.7)</td><td class="num">8:39p (6.7)</td><td>4:00–8:40p <span class="sub">(best tide of the week — but it's big-hike day)</span></td></tr>
-        <tr><td>Sat 7/25</td><td class="num">3:23p (3.7)</td><td class="num">9:28p (6.8)</td><td>afternoon–evening <span class="sub">(departure day)</span></td></tr>
+        <tr><td>Mon 7/20</td><td class="num" data-label="Midday low">10:45a (1.3)</td><td class="num" data-label="Evening high">5:30p (6.6)</td><td data-label="Evening incoming window — fish this">3:00–5:30p <span class="sub">(B's 3–4p solo slot works; outgoing after 5:30)</span></td></tr>
+        <tr><td>Tue 7/21</td><td class="num" data-label="Midday low">11:28a (2.1)</td><td class="num" data-label="Evening high">6:13p (6.6)</td><td data-label="Evening incoming window — fish this">4:00–6:15p</td></tr>
+        <tr><td>Wed 7/22</td><td class="num" data-label="Midday low">12:17p (2.9)</td><td class="num" data-label="Evening high">6:59p (6.6)</td><td data-label="Evening incoming window — fish this"><b>4:00–7:00p ★</b></td></tr>
+        <tr><td>Thu 7/23</td><td class="num" data-label="Midday low">1:16p (3.4)</td><td class="num" data-label="Evening high">7:48p (6.6)</td><td data-label="Evening incoming window — fish this"><b>4:00–7:45p ★</b></td></tr>
+        <tr><td>Fri 7/24</td><td class="num" data-label="Midday low">2:22p (3.7)</td><td class="num" data-label="Evening high">8:39p (6.7)</td><td data-label="Evening incoming window — fish this">4:00–8:40p <span class="sub">(best tide of the week — but it's big-hike day)</span></td></tr>
+        <tr><td>Sat 7/25</td><td class="num" data-label="Midday low">3:23p (3.7)</td><td class="num" data-label="Evening high">9:28p (6.8)</td><td data-label="Evening incoming window — fish this">afternoon–evening <span class="sub">(departure day)</span></td></tr>
       </tbody>
     </table></div>
-    <div class="callout">🎣 <b>Key insight:</b> the evening high slides ~50 min later each day, so the after-work incoming window stretches all week — <b>Wed 7/22 and Thu 7/23 are the ideal after-work surfperch tides</b> (full 4p-to-high flood). That dovetails perfectly with the Wed Trinidad evening.</div>
+    <div class="callout"><b>Key insight:</b> the evening high slides ~50 min later each day, so the after-work incoming window stretches all week — <b>Wed 7/22 and Thu 7/23 are the ideal after-work surfperch tides</b> (full 4p-to-high flood). That dovetails perfectly with the Wed Trinidad evening.</div>
     <ul class="sub">
       <li><b>Tide-pooling:</b> the good minus tides are pre-dawn this week (0.5 ft at 3:19a Fri, 0.2 ft at 4:10a Sat); midday lows are weak. <b>Not a tide-pool week</b> — skip planning around it.</li>
       <li>Neap tides early week (first-quarter moon 7/21) → smaller swings Mon–Wed, building toward the weekend.</li>
@@ -821,11 +882,11 @@
 
   <!-- ================= GEOLOGY & HISTORY ================= -->
   <section class="block" id="readings">
-    <h2>🌋 Geology &amp; history — learn as you go</h2>
+    <h2>Geology &amp; history — learn as you go</h2>
     <p class="sub">Six ~2-minute reads, one per leg. Tap to open when you're there (passenger reads aloud on drives).</p>
 
     <details class="reading">
-      <summary><span class="tag">📖 Read Sat 7/18, on the drive in</span><b>1 · Lassen — the volcano that blew up on camera</b></summary>
+      <summary><span class="tag">Read Sat 7/18, on the drive in</span><b>1 · Lassen — the volcano that blew up on camera</b></summary>
       <div class="rd">
         <p class="hook">In 1914, Lassen Peak had been quiet so long that locals picnicked on it. Then, on May 30, it cleared its throat — and for the next three years put on the American West's only 20th-century volcanic eruption south of Alaska until St. Helens.</p>
         <p>Lassen is a geologic sampler platter: one of the few places on Earth with <b>all four volcano types</b> in one park — shield (Prospect Peak), composite/stratovolcano (Brokeoff, the eroded remnant of ancient Mount Tehama), cinder cone (the aptly named Cinder Cone), and plug dome. Lassen Peak itself is one of the <b>largest plug-dome volcanoes in the world</b>: a ~27,000-year-old bulge of stiff dacite lava that squeezed up like toothpaste too thick to flow away.</p>
@@ -835,7 +896,7 @@
     </details>
 
     <details class="reading">
-      <summary><span class="tag">📖 Read Sun 7/19 morning</span><b>2 · Mt Shasta &amp; the birth of the Sacramento</b></summary>
+      <summary><span class="tag">Read Sun 7/19 morning</span><b>2 · Mt Shasta &amp; the birth of the Sacramento</b></summary>
       <div class="rd">
         <p class="hook">The bottle you fill at Mt Shasta City Park this morning holds snow that fell on the mountain decades ago — filtered through a volcano and emerging as the headwaters spring of California's largest river.</p>
         <p><b>Mount Shasta</b> (14,179 ft) is the giant of the southern Cascades — a stratovolcano so massive it's among the most voluminous in the entire arc, visible from 100+ miles on a clear day. It's really a pile of overlapping cones built over hundreds of thousands of years; the youngest, <b>Shastina</b>, on its west shoulder, would be a major peak on its own. Shasta still hosts several glaciers — including Whitney Glacier, the longest in California — and it is dormant, not dead: its last eruption was within the past ~800 years, and USGS ranks it among the highest-threat volcanoes in the country (which mostly means it's very well monitored).</p>
@@ -845,7 +906,7 @@
     </details>
 
     <details class="reading">
-      <summary><span class="tag">📖 Read Sun 7/19 afternoon — passenger only, 55 hairpins</span><b>3 · Hwy 299: gold, the Trinity, and a temple in the forest</b></summary>
+      <summary><span class="tag">Read Sun 7/19 afternoon — passenger only, 55 hairpins</span><b>3 · Hwy 299: gold, the Trinity, and a temple in the forest</b></summary>
       <div class="rd">
         <p class="hook">The highway you're winding along follows the Trinity River, and nearly every gravel bar you pass was turned over by hand, by hose, or by dredge in one of California's most intense gold rushes.</p>
         <p>Gold hit the <b>Trinity River</b> in 1848, months after Sutter's Mill, and by 1850 <b>Weaverville</b> existed as a supply camp deep in the mountains. What makes Trinity County's story distinctive is who did much of the mining: by the mid-1850s roughly <b>2,000 Chinese miners</b> lived and worked around Weaverville — reworking claims, running stores, and building a community despite discriminatory taxes and violence (including the infamous 1854 "Weaverville Tong War," an armed clash between rival Chinese companies fought as a spectacle while white miners watched).</p>
@@ -855,7 +916,7 @@
     </details>
 
     <details class="reading">
-      <summary><span class="tag">📖 Read Eureka week, before your first grove</span><b>4 · Coast redwoods: fog-drinkers, fire-survivors, and the ones that got away</b></summary>
+      <summary><span class="tag">Read Eureka week, before your first grove</span><b>4 · Coast redwoods: fog-drinkers, fire-survivors, and the ones that got away</b></summary>
       <div class="rd">
         <p class="hook">The tallest living things on Earth exist in a strip of coast about 450 miles long and rarely 30 miles wide — and the reason is the same fog that will be sitting on your Airbnb half the mornings this week.</p>
         <p><b>Coast redwood</b> (<em>Sequoia sempervirens</em>) is the tallest tree species on the planet — the record tree, Hyperion (in Redwood NP; location closed to visitors), tops 380 feet. They live 2,000+ years. Their tricks:</p>
@@ -869,7 +930,7 @@
     </details>
 
     <details class="reading">
-      <summary><span class="tag">📖 Read on an Old Town Eureka evening</span><b>5 · Wigi / Humboldt Bay: Wiyot, Yurok, Tolowa — and a rare piece of land returned</b></summary>
+      <summary><span class="tag">Read on an Old Town Eureka evening</span><b>5 · Wigi / Humboldt Bay: Wiyot, Yurok, Tolowa — and a rare piece of land returned</b></summary>
       <div class="rd">
         <p class="hook">The island you can see from the Eureka boardwalk is the center of the world — literally, in Wiyot cosmology — and in 2019 it became one of the first places a U.S. city ever returned to a tribe, no strings attached.</p>
         <p>Humboldt Bay is <b>Wiyot</b> homeland — their name for the bay is <b>Wigi</b>. <b>Tuluwat</b>, on Indian Island opposite Old Town, is the site of the Wiyot world-renewal ceremony, held each year to bring the world back into balance. In <b>February 1860</b>, during that ceremony, Eureka-area settlers crossed to the island at night and massacred the Wiyot sleeping there — mostly women, children, and elders; coordinated attacks hit other villages the same night. The young writer <b>Bret Harte</b> published a furious denunciation and was run out of the region for it. Survivors were interned; the Wiyot were nearly destroyed.</p>
@@ -879,7 +940,7 @@
     </details>
 
     <details class="reading">
-      <summary><span class="tag">📖 Read Sat 7/25, return leg</span><b>6 · Cascadia: the coast that's loading a spring</b></summary>
+      <summary><span class="tag">Read Sat 7/25, return leg</span><b>6 · Cascadia: the coast that's loading a spring</b></summary>
       <div class="rd">
         <p class="hook">The wave-battered coast you're driving home along is the most seismically active corner of the lower 48 — and the sea stacks, marine terraces, and tsunami-zone signs all tell the same story.</p>
         <p>Offshore, the small <b>Gorda plate</b> (southern end of the Juan de Fuca system) is diving beneath North America along the <b>Cascadia Subduction Zone</b>. Near <b>Cape Mendocino</b> — just south of the Lost Coast — it meets the Pacific plate and the San Andreas fault at the <b>Mendocino Triple Junction</b>, a three-plate pileup that makes Humboldt County California's earthquake capital (locals barely blink at magnitude 5s; a 7.0 struck offshore as recently as December 2024).</p>
@@ -891,7 +952,7 @@
 
   <!-- ================= WILDLIFE ================= -->
   <section class="block" id="wildlife">
-    <h2>🦌 Flora &amp; fauna — what to spot</h2>
+    <h2>Flora &amp; fauna — what to spot</h2>
     <p class="sub">Two very different worlds this trip — volcanic high country, then the fog forest and coast. Keep an eye out for these.</p>
 
     <h3>Mountains — Lassen (Sat 7/18)</h3>
@@ -904,20 +965,20 @@
 
     <h3>Redwoods &amp; coast (Eureka week + return)</h3>
     <div class="cards">
-      <div class="card"><b>🐌 Banana slug</b> The forest's bright-yellow mascot and chief recycler — out on damp trails after the fog. Bright color warns of a numbing slime; look, don't taste.</div>
+      <div class="card"><b>Banana slug</b> The forest's bright-yellow mascot and chief recycler — out on damp trails after the fog. Bright color warns of a numbing slime; look, don't taste.</div>
       <div class="card"><b>Roosevelt elk</b> Big herds at <b>Elk Prairie</b> and Gold Bluffs Beach — the largest elk in North America. <span class="badge-warn">Keep 25+ yards</span> Bulls get aggressive as summer rut builds; never get between a cow and calf.</div>
       <div class="card"><b>Marbled murrelet</b> An endangered little seabird that <b>nests only in old-growth canopy</b> — the reason parks beg you not to feed jays/ravens, which raid its nests. You won't see it; now you know why the "no food" signs are serious.</div>
       <div class="card"><b>California condor</b> North America's largest bird (~9.5 ft span) — <b>reintroduced to this region by the Yurok Tribe starting 2022</b>, the first condors here in over a century. Long shot, but scan the sky at <b>Klamath River Overlook</b>. Numbered wing tags = a known bird.</div>
       <div class="card"><b>Harbor seals &amp; tide pools</b> Seals haul out around Trinidad; low-tide rocks hold sea stars, anemones, and hermit crabs (though this week's good lows are pre-dawn — see Timing).</div>
       <div class="card"><b>Black bear</b> Present but shy in the redwoods — store food, don't leave a cooler out at the Airbnb or trailheads.</div>
     </div>
-    <div class="callout warn">🧭 <b>Wildlife etiquette:</b> give room — 25+ yards from elk, farther from bears. Never feed anything (corvids included — they hunt murrelet nests). Stay on trails, pack out all food, and keep the Airbnb bear-smart.</div>
+    <div class="callout warn"><b>Wildlife etiquette:</b> give room — 25+ yards from elk, farther from bears. Never feed anything (corvids included — they hunt murrelet nests). Stay on trails, pack out all food, and keep the Airbnb bear-smart.</div>
   </section>
 
   <!-- ================= DRIVE AUDIO ================= -->
   <section class="block" id="drive-audio">
-    <h2>🎧 While you drive</h2>
-    <div class="callout warn">📥 <b>Download before you lose signal.</b> Hwy 299, the groves, and the Hwy 1 coast are dead zones — queue podcasts/audiobooks/playlists <em>offline</em> before you leave town.</div>
+    <h2>While you drive</h2>
+    <div class="callout warn"><b>Download before you lose signal.</b> Hwy 299, the groves, and the Hwy 1 coast are dead zones — queue podcasts/audiobooks/playlists <em>offline</em> before you leave town.</div>
     <ul>
       <li><b>SJ → Redding (Fri):</b> a warm-up road-trip playlist to shake off Bay Area traffic, plus a California-history podcast to set the mood.</li>
       <li><b>Lassen day (Sat):</b> the NPS Lassen self-guided road-audio, or a volcano-science episode — then pair it with reading card #1 as you pass the Devastated Area.</li>
@@ -929,18 +990,18 @@
 
   <!-- ================= FISHING ================= -->
   <section class="block" id="fishing">
-    <h2>🎣 Fishing guide</h2>
+    <h2>Fishing guide</h2>
     <p class="sub"><b>Gear on board:</b> Ugly Stik travel rod · lures, lines, hooks · Garmin Striker Cast sonar. Bait bought locally.</p>
 
     <h3>2026 license — verified (CDFW)</h3>
-    <div class="callout warn">🪪 License needed for lake / beach / jetty / river — <b>NOT for public piers</b>. Buy online <b>before</b> fishing: <a href="https://wildlife.ca.gov/Licensing/Fishing">wildlife.ca.gov/Licensing/Fishing</a> → "Online License Sales and Services". A phone/printed copy of the digital license is fine.</div>
-    <div class="scroll"><table class="data" style="min-width:24rem">
+    <div class="callout warn">License needed for lake / beach / jetty / river — <b>NOT for public piers</b>. Buy online <b>before</b> fishing: <a href="https://wildlife.ca.gov/Licensing/Fishing">wildlife.ca.gov/Licensing/Fishing</a> → "Online License Sales and Services". A phone/printed copy of the digital license is fine.</div>
+    <div class="scroll"><table class="data">
       <thead><tr><th>Option</th><th>2026 price</th><th>Covers</th></tr></thead>
       <tbody>
-        <tr><td><b>One-day sport fishing</b></td><td class="num"><b>$21.09</b></td><td>any one day, ocean + inland (res &amp; non-res same)</td></tr>
-        <tr><td><b>Two-day sport fishing</b></td><td class="num"><b>$32.40</b></td><td>any two consecutive days</td></tr>
-        <tr><td>Ten-day nonresident</td><td class="num">$64.54</td><td>10 consecutive days</td></tr>
-        <tr><td>Annual resident</td><td class="num">$64.54</td><td>full year</td></tr>
+        <tr><td><b>One-day sport fishing</b></td><td class="num" data-label="2026 price"><b>$21.09</b></td><td data-label="Covers">any one day, ocean + inland (res &amp; non-res same)</td></tr>
+        <tr><td><b>Two-day sport fishing</b></td><td class="num" data-label="2026 price"><b>$32.40</b></td><td data-label="Covers">any two consecutive days</td></tr>
+        <tr><td>Ten-day nonresident</td><td class="num" data-label="2026 price">$64.54</td><td data-label="Covers">10 consecutive days</td></tr>
+        <tr><td>Annual resident</td><td class="num" data-label="2026 price">$64.54</td><td data-label="Covers">full year</td></tr>
       </tbody>
     </table></div>
     <p class="sub"><b>Recommended:</b> one <b>two-day ($32.40)</b> per angler covers the Wed 7/22 + Thu 7/23 evening jetty/beach sessions; piers need nothing. Adding Manzanita Lake 7/18? Two-day + one-day = $53.49 vs annual $64.54 — annual wins at 3+ days. No extra stamps here (Ocean Enhancement stamp only applies south of Point Arguello; no report cards for surfperch/trout).</p>
@@ -948,28 +1009,28 @@
     <h3>Spots &amp; rigs</h3>
     <div class="cards">
       <div class="card"><b>Manzanita Lake (Sat 7/18)</b> Optional during the paddle stop. Verified NPS regs: <b>C&amp;R only · single BARBLESS hook · artificial lures/flies only · NO bait (living or non-living)</b> · CA license required. Wild trophy rainbow/brown — no longer stocked. Rig: 1/8–1/4 oz Kastmaster or Panther Martin (<b>pinch the barb!</b>); Garmin Cast from shore to find the drop-off.</div>
-      <div class="card"><b>North Jetty / Mad River Beach</b> Summer <b>redtail surfperch</b> — verified open all year here (the Apr–Jul closure is SF Bay only). Limits: <b>20 surfperch aggregate, max 10 of one species, redtail min 10.5 in</b>. Incoming tide, cast into the troughs. High/low leader, size 4–6 hooks, 1–3 oz pyramid; sand crabs / Gulp! sandworms / shrimp. ⚠ <b>Sneaker waves on the jetties — real danger, stay alert.</b> License required here.</div>
+      <div class="card"><b>North Jetty / Mad River Beach</b> Summer <b>redtail surfperch</b> — verified open all year here (the Apr–Jul closure is SF Bay only). Limits: <b>20 surfperch aggregate, max 10 of one species, redtail min 10.5 in</b>. Incoming tide, cast into the troughs. High/low leader, size 4–6 hooks, 1–3 oz pyramid; sand crabs / Gulp! sandworms / shrimp. <b>Sneaker waves on the jetties — real danger, stay alert.</b> License required here.</div>
       <div class="card"><b>Del Norte St Pier / Boardwalk</b> <b>No license needed</b> (public pier). Perch, jacksmelt — easy, safe, in-town; perfect for B's 3–4p solo window. Finfish bag limits still apply.
-        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Del+Norte+Street+Pier+Eureka+CA">🧭 Navigate</a></div>
+        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Del+Norte+Street+Pier+Eureka+CA">Navigate</a></div>
       <div class="card"><b>Trinidad Pier</b> Coastal perch / rockfish — public pier, <b>no license</b>. Pairs with the Wednesday Trinidad evening, which is also the week's best tide.
-        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Trinidad+Head+Trinidad+CA">🧭 Navigate</a></div>
+        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Trinidad+Head+Trinidad+CA">Navigate</a></div>
     </div>
-    <div class="callout">🌊 <b>Best after-work tides: Wed 7/22 (flood 4–7p) and Thu 7/23 (flood 4–7:45p)</b> — full table in Timing intel above.</div>
+    <div class="callout"><b>Best after-work tides: Wed 7/22 (flood 4–7p) and Thu 7/23 (flood 4–7:45p)</b> — full table in Timing intel above.</div>
 
     <h3>Bait &amp; tackle — verified 2026</h3>
     <ul>
       <li><b>Englund Marine &amp; Industrial Supply</b> — 590 W Waterfront Dr, Eureka · (707) 444-9266 · <b>Mon–Fri 8–5:30, Sat 8–3, closed Sun.</b> The commercial-fleet supplier: tackle, bait, local advice. Closed Sunday → no arrival-day stop; after-work Mon won't work either (closes 5:30) — <b>B's 3–4p solo slot is the window</b>.
-        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Englund+Marine+590+W+Waterfront+Dr+Eureka+CA">🧭 Navigate</a></li>
+        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Englund+Marine+590+W+Waterfront+Dr+Eureka+CA">Navigate</a></li>
       <li><b>Pacific Outfitters</b> — 1600 5th St, Eureka · (707) 443-6328 · outdoor store with fishing dept, longer evening hours than Englund (call to confirm bait stock).
-        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pacific+Outfitters+1600+5th+St+Eureka+CA">🧭 Navigate</a></li>
+        <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pacific+Outfitters+1600+5th+St+Eureka+CA">Navigate</a></li>
       <li><b>Fresh sand crabs:</b> pump/dig your own at the beach on a low tide — free, and the top redtail bait.</li>
     </ul>
   </section>
 
   <!-- ================= STARGAZING ================= -->
   <section class="block" id="stars">
-    <h2>🌌 Stargazing</h2>
-    <div class="callout">🌙 <b>Sat 7/18 verdict: very good night</b> (verified, USNO). Waxing crescent only <b>24% lit</b>, hanging low in the west — minor glow, actually a nice photo element over the lake. Moonset <b>11:06p</b> → fully moon-free after that. Astronomical darkness starts <b>10:31p</b> (Bortle ~2 skies out there).</div>
+    <h2>Stargazing</h2>
+    <div class="callout"><b>Sat 7/18 verdict: very good night</b> (verified, USNO). Waxing crescent only <b>24% lit</b>, hanging low in the west — minor glow, actually a nice photo element over the lake. Moonset <b>11:06p</b> → fully moon-free after that. Astronomical darkness starts <b>10:31p</b> (Bortle ~2 skies out there).</div>
     <ul>
       <li><b>Primary: Manzanita Lake, Sat 7/18, 8:50–9:40p block</b> — bright stars, the Summer Triangle (Vega/Deneb/Altair) overhead, and the <b>Milky Way core just emerging in the south</b> over the lake (core rises over/near Lassen Peak early in the night).</li>
       <li><b>The upgrade:</b> the core turns naked-eye obvious ~9:45–10p and is <b>best from 10:30p onward</b> once fully dark. If you can stretch to ~10:30–11:15p before the ~50 min drive back, you get the real show — core + reflection, crescent setting. Weigh against the Sunday drive day.</li>
@@ -982,27 +1043,27 @@
 
   <!-- ================= ROAD-TRIP PRACTICAL ================= -->
   <section class="block" id="practical">
-    <h2>🚗 Road-trip practical</h2>
+    <h2>Road-trip practical</h2>
     <h3>Drive times (confirmed vs route mileage — add cushion for summer traffic)</h3>
-    <div class="scroll"><table class="data" style="min-width:28rem">
+    <div class="scroll"><table class="data">
       <thead><tr><th>Leg</th><th>Time</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>San Jose → Redding</td><td class="num">~3.5–4 hr</td><td>~230 mi; Bay Area Friday-PM traffic can add 30–45 min getting out</td></tr>
-        <tr><td>Redding → Lassen SW entrance</td><td class="num">~1 hr</td><td>~48 mi via 44/89 or 36/89</td></tr>
-        <tr><td>Manzanita Lake → Redding</td><td class="num">~50–55 min</td><td>~47 mi, Hwy 44 W — the Sat-night return</td></tr>
-        <tr><td>Redding → Mt Shasta City</td><td class="num">~1 hr</td><td>~60 mi, I-5 N</td></tr>
-        <tr><td>Redding → Eureka (Hwy 299)</td><td class="num">~3.5 hr</td><td>~150 mi; 55 hairpins; realistic door-to-door w/ leg-stretch. Check Caltrans QuickMap for one-way controls (quickmap.dot.ca.gov · 1-800-427-7623)</td></tr>
-        <tr><td>Eureka → Prairie Creek (Elk Prairie VC)</td><td class="num">~50 min</td><td>~50 mi, US-101 N</td></tr>
-        <tr><td>Eureka → Trinidad</td><td class="num">~25 min</td><td>~22 mi</td></tr>
-        <tr><td>Eureka → Klamath River Overlook</td><td class="num">~1 hr 10</td><td>~64 mi</td></tr>
-        <tr><td>Eureka → San Jose via Hwy 1</td><td class="num">~8–10+ hr <span class="badge-tbd">TBD 1 vs 2 days</span></td><td>driving alone; Leggett→Fort Bragg's ~22 mi of tight curves ≈ 1 hr by itself. With real stops it's a 12+ hr day — the 2-day option is the humane one. Straight US-101 fallback: ~5.5–6.5 hr</td></tr>
+        <tr><td>San Jose → Redding</td><td class="num" data-label="Time">~3.5–4 hr</td><td data-label="Notes">~230 mi; Bay Area Friday-PM traffic can add 30–45 min getting out</td></tr>
+        <tr><td>Redding → Lassen SW entrance</td><td class="num" data-label="Time">~1 hr</td><td data-label="Notes">~48 mi via 44/89 or 36/89</td></tr>
+        <tr><td>Manzanita Lake → Redding</td><td class="num" data-label="Time">~50–55 min</td><td data-label="Notes">~47 mi, Hwy 44 W — the Sat-night return</td></tr>
+        <tr><td>Redding → Mt Shasta City</td><td class="num" data-label="Time">~1 hr</td><td data-label="Notes">~60 mi, I-5 N</td></tr>
+        <tr><td>Redding → Eureka (Hwy 299)</td><td class="num" data-label="Time">~3.5 hr</td><td data-label="Notes">~150 mi; 55 hairpins; realistic door-to-door w/ leg-stretch. Check Caltrans QuickMap for one-way controls (quickmap.dot.ca.gov · 1-800-427-7623)</td></tr>
+        <tr><td>Eureka → Prairie Creek (Elk Prairie VC)</td><td class="num" data-label="Time">~50 min</td><td data-label="Notes">~50 mi, US-101 N</td></tr>
+        <tr><td>Eureka → Trinidad</td><td class="num" data-label="Time">~25 min</td><td data-label="Notes">~22 mi</td></tr>
+        <tr><td>Eureka → Klamath River Overlook</td><td class="num" data-label="Time">~1 hr 10</td><td data-label="Notes">~64 mi</td></tr>
+        <tr><td>Eureka → San Jose via Hwy 1</td><td class="num" data-label="Time">~8–10+ hr <span class="badge-tbd">TBD 1 vs 2 days</span></td><td data-label="Notes">driving alone; Leggett→Fort Bragg's ~22 mi of tight curves ≈ 1 hr by itself. With real stops it's a 12+ hr day — the 2-day option is the humane one. Straight US-101 fallback: ~5.5–6.5 hr</td></tr>
       </tbody>
     </table></div>
 
     <h3>Fuel &amp; dead zones</h3>
     <ul>
-      <li>⛽ Fill in <b>Redding before 299</b>; few stations on 299 and on the <b>Leggett–Fort Bragg</b> stretch of Hwy 1.</li>
-      <li>📵 <b>Dead zones:</b> Hwy 299 · redwood groves · Hwy 1 coast → offline Google Maps + this page saved offline.</li>
+      <li>Fill in <b>Redding before 299</b>; few stations on 299 and on the <b>Leggett–Fort Bragg</b> stretch of Hwy 1.</li>
+      <li><b>Dead zones:</b> Hwy 299 · redwood groves · Hwy 1 coast → offline Google Maps + this page saved offline.</li>
     </ul>
 
     <h3>Park gotchas</h3>
@@ -1014,20 +1075,20 @@
     </ul>
 
     <div class="emergency">
-      <h3>🆘 Emergency card — screenshot this</h3>
+      <h3>Emergency card — screenshot this</h3>
       <p style="margin:.2rem 0 .5rem"><b>Emergencies: <span class="num">911</span></b> — works on any carrier with signal; <b>text-to-911</b> supported in Humboldt &amp; Shasta counties. In a dead zone: drive to high ground or the nearest highway.</p>
 
       <b>Hospitals (24-hr ER)</b>
-      <div class="scroll"><table class="data" style="min-width:30rem">
+      <div class="scroll"><table class="data">
         <thead><tr><th>Area</th><th>Hospital</th><th>Address</th><th>Phone</th></tr></thead>
         <tbody>
-          <tr><td>Redding</td><td><b>Mercy Medical Center Redding</b> (Level II trauma — the big one)</td><td>2175 Rosaline Ave</td><td class="num">ER (530) 225-7200</td></tr>
-          <tr><td>Redding</td><td>Shasta Regional Medical Center</td><td>1100 Butte St</td><td class="num">(530) 244-5400 · ER (530) 288-4191</td></tr>
-          <tr><td>Mt Shasta (Sun leg)</td><td>Mercy Medical Center Mt. Shasta (small 24-hr ER)</td><td>914 Pine St</td><td class="num">(530) 926-6111</td></tr>
-          <tr><td>Eureka</td><td><b>Providence St. Joseph Hospital</b> (Level III trauma — county's highest)</td><td>2700 Dolbeer St</td><td class="num">ER (707) 269-4250</td></tr>
+          <tr><td>Redding</td><td data-label="Hospital"><b>Mercy Medical Center Redding</b> (Level II trauma — the big one)</td><td data-label="Address">2175 Rosaline Ave</td><td class="num" data-label="Phone">ER (530) 225-7200</td></tr>
+          <tr><td>Redding</td><td data-label="Hospital">Shasta Regional Medical Center</td><td data-label="Address">1100 Butte St</td><td class="num" data-label="Phone">(530) 244-5400 · ER (530) 288-4191</td></tr>
+          <tr><td>Mt Shasta (Sun leg)</td><td data-label="Hospital">Mercy Medical Center Mt. Shasta (small 24-hr ER)</td><td data-label="Address">914 Pine St</td><td class="num" data-label="Phone">(530) 926-6111</td></tr>
+          <tr><td>Eureka</td><td data-label="Hospital"><b>Providence St. Joseph Hospital</b> (Level III trauma — county's highest)</td><td data-label="Address">2700 Dolbeer St</td><td class="num" data-label="Phone">ER (707) 269-4250</td></tr>
         </tbody>
       </table></div>
-      <p class="sub" style="margin:.3rem 0 .6rem">⚠ Nothing between Weaverville and Eureka on 299 — for that stretch: 911 + nearest milepost.</p>
+      <p class="sub" style="margin:.3rem 0 .6rem">Nothing between Weaverville and Eureka on 299 — for that stretch: 911 + nearest milepost.</p>
 
       <ul style="padding-left:1.1rem">
         <li><b>Lassen NP main:</b> <span class="num">(530) 595-4480</span></li>
@@ -1043,22 +1104,22 @@
 
   <!-- ================= FOOD ================= -->
   <section class="block" id="food">
-    <h2>🍽 Food — cook-in × restaurants</h2>
+    <h2>Food — cook-in × restaurants</h2>
     <p class="sub">Pattern: cook-in at the Airbnb on workdays, restaurants interleaved on travel days + a few treat nights. <b>R</b> = restaurant · <b>C</b> = cook-in / packed.</p>
     <div class="scroll"><table class="data">
       <thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead>
       <tbody>
-        <tr><td>Fri 7/17</td><td>—</td><td>on the road</td><td><b>R</b> Redding brewery (arrival)</td></tr>
-        <tr><td>Sat 7/18</td><td>C quick (motel)</td><td><b>C packed</b> picnic (Lassen)</td><td><b>C packed</b> / early lake dinner</td></tr>
-        <tr><td>Sun 7/19</td><td><b>R</b> Mt Shasta downtown</td><td><b>R</b> quick Redding</td><td><b>C</b> first Airbnb cook-in</td></tr>
-        <tr><td>Mon–Thu</td><td>C quick (pre-work)</td><td>C (work-from-Airbnb)</td><td>mix: <b>C</b> + <b>R</b> 1–2 brewery/dinner-out nights</td></tr>
-        <tr><td>Fri 7/24</td><td>C</td><td><b>C packed</b> (Prairie Creek)</td><td><b>R</b> celebrate the big hike</td></tr>
-        <tr><td>Sat 7/25</td><td>C / road</td><td>road</td><td><span class="badge-tbd">TBD</span> return leg</td></tr>
+        <tr><td>Fri 7/17</td><td data-label="Breakfast">—</td><td data-label="Lunch">on the road</td><td data-label="Dinner"><b>R</b> Redding brewery (arrival)</td></tr>
+        <tr><td>Sat 7/18</td><td data-label="Breakfast">C quick (motel)</td><td data-label="Lunch"><b>C packed</b> picnic (Lassen)</td><td data-label="Dinner"><b>C packed</b> / early lake dinner</td></tr>
+        <tr><td>Sun 7/19</td><td data-label="Breakfast"><b>R</b> Mt Shasta downtown</td><td data-label="Lunch"><b>R</b> quick Redding</td><td data-label="Dinner"><b>C</b> first Airbnb cook-in</td></tr>
+        <tr><td>Mon–Thu</td><td data-label="Breakfast">C quick (pre-work)</td><td data-label="Lunch">C (work-from-Airbnb)</td><td data-label="Dinner">mix: <b>C</b> + <b>R</b> 1–2 brewery/dinner-out nights</td></tr>
+        <tr><td>Fri 7/24</td><td data-label="Breakfast">C</td><td data-label="Lunch"><b>C packed</b> (Prairie Creek)</td><td data-label="Dinner"><b>R</b> celebrate the big hike</td></tr>
+        <tr><td>Sat 7/25</td><td data-label="Breakfast">C / road</td><td data-label="Lunch">road</td><td data-label="Dinner"><span class="badge-tbd">TBD</span> return leg</td></tr>
       </tbody>
     </table></div>
 
     <div class="callout warn">
-      ⚠ <b>Closure conflicts — plan around these:</b>
+      <b>Closure conflicts — plan around these:</b>
       <ul style="margin:.3rem 0 0">
         <li><b>Mad River Brewery: closed Tuesday.</b></li>
         <li><b>Six Rivers Brewery: closed Sun &amp; Mon.</b> (Mon 7/20 options are thin → Lost Coast Café is the reliable Monday choice.)</li>
@@ -1071,33 +1132,33 @@
     <ul>
       <li><b>Breweries (Eureka area):</b>
         <ul>
-          <li><b>Lost Coast Brewery &amp; Café</b> — 617 4th St · (707) 445-4480 · daily from 11:30a (summer). The dinner-out workhorse — open every night. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lost+Coast+Brewery+Eureka+CA">🧭 Nav</a> Separate Taproom at 1600 Sunset Dr (25 taps, snacks, ice cream, dog-friendly): Wed–Sun 12–7p <span class="badge-warn">closed Mon–Tue</span></li>
+          <li><b>Lost Coast Brewery &amp; Café</b> — 617 4th St · (707) 445-4480 · daily from 11:30a (summer). The dinner-out workhorse — open every night. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lost+Coast+Brewery+Eureka+CA">Nav</a> Separate Taproom at 1600 Sunset Dr (25 taps, snacks, ice cream, dog-friendly): Wed–Sun 12–7p <span class="badge-warn">closed Mon–Tue</span></li>
           <li><b>Paskenta Mad River Brewery Tap Room</b> — 101 Taylor Way, Blue Lake · (707) 668-4151 · ~12–9p <span class="badge-warn">closed Tue</span> Blue Lake is often above the fog = sunny beer garden.</li>
           <li><b>Six Rivers Brewery</b> — 1300 Central Ave, McKinleyville · (707) 839-7580 · Tue–Thu 12–8, Fri–Sat 12–9 <span class="badge-warn">closed Sun–Mon</span> Pairs with a Trinidad evening (10 min away).</li>
         </ul>
       </li>
       <li><b>Bakeries / sweets / ice cream:</b>
         <ul>
-          <li><b>Los Bagels</b> — 403 2nd St, Old Town · daily 7a–3p. Mexican-Jewish bagelry, a Humboldt institution — pre-work breakfast runs. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Los+Bagels+Eureka+CA">🧭 Nav</a></li>
-          <li><b>Ramone's Bakery &amp; Café</b> — Old Town 209 E St, Mon–Sat 7:30–5 <span class="badge-warn">Old Town closed Sun</span> · also 2297 Harrison Ave (daily from 7a, to 8p weekdays) &amp; 4100 Broadway. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ramones+Bakery+Eureka+CA">🧭 Nav</a></li>
-          <li><b>Living the Dream Ice Cream</b> — 1 F St (Old Town waterfront) · daily 12–9, Fri–Sat to 10p. Small-batch, Straus organic dairy — post-dinner boardwalk walk. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Living+the+Dream+Ice+Cream+1+F+St+Eureka+CA">🧭 Nav</a></li>
+          <li><b>Los Bagels</b> — 403 2nd St, Old Town · daily 7a–3p. Mexican-Jewish bagelry, a Humboldt institution — pre-work breakfast runs. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Los+Bagels+Eureka+CA">Nav</a></li>
+          <li><b>Ramone's Bakery &amp; Café</b> — Old Town 209 E St, Mon–Sat 7:30–5 <span class="badge-warn">Old Town closed Sun</span> · also 2297 Harrison Ave (daily from 7a, to 8p weekdays) &amp; 4100 Broadway. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ramones+Bakery+Eureka+CA">Nav</a></li>
+          <li><b>Living the Dream Ice Cream</b> — 1 F St (Old Town waterfront) · daily 12–9, Fri–Sat to 10p. Small-batch, Straus organic dairy — post-dinner boardwalk walk. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Living+the+Dream+Ice+Cream+1+F+St+Eureka+CA">Nav</a></li>
         </ul>
       </li>
       <li><b>Dinner-out / celebration:</b>
         <ul>
-          <li><b>Brick &amp; Fire Bistro</b> — 1630 F St · (707) 268-8959 · dinner 5–8:30p <span class="badge-warn">closed Tue · kitchen 8:30p</span> Wood-fired pizza/Mediterranean, frequently ranked Eureka's #1 — see the Fri 7/24 caveat above; reserve ahead. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Brick+and+Fire+Bistro+1630+F+St+Eureka+CA">🧭 Nav</a></li>
+          <li><b>Brick &amp; Fire Bistro</b> — 1630 F St · (707) 268-8959 · dinner 5–8:30p <span class="badge-warn">closed Tue · kitchen 8:30p</span> Wood-fired pizza/Mediterranean, frequently ranked Eureka's #1 — see the Fri 7/24 caveat above; reserve ahead. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Brick+and+Fire+Bistro+1630+F+St+Eureka+CA">Nav</a></li>
         </ul>
       </li>
       <li><b>Mt Shasta City (Sun 7/19 breakfast):</b>
         <ul>
-          <li><b>Seven Suns Coffee &amp; Café</b> — 1011 S Mt Shasta Blvd · daily 6a–2p. Breakfast burritos + bakery — fits the 10:15a slot easily. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Seven+Suns+Coffee+1011+S+Mt+Shasta+Blvd+Mount+Shasta+CA">🧭 Nav</a></li>
+          <li><b>Seven Suns Coffee &amp; Café</b> — 1011 S Mt Shasta Blvd · daily 6a–2p. Breakfast burritos + bakery — fits the 10:15a slot easily. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Seven+Suns+Coffee+1011+S+Mt+Shasta+Blvd+Mount+Shasta+CA">Nav</a></li>
           <li><b>The Oven Bakery</b> (backup / second stop) — 214 N Mt Shasta Blvd, downtown. Artisan sourdough — grab a loaf for the week's cook-ins.</li>
         </ul>
       </li>
       <li><b>Redding (Fri 7/17 dinner + Sun 7/19 quick lunch):</b>
         <ul>
-          <li><b>Woody's Brewing Co.</b> — 1257 Oregon St · Tue–Thu 11–9, Fri–Sat 11–10, Sun 11–8 <span class="badge-warn">closed Mon</span> Open for Friday arrival. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Woodys+Brewing+Co+1257+Oregon+St+Redding+CA">🧭 Nav</a></li>
-          <li><b>Final Draft Brewing</b> — 1600 California St · daily 11a–9/10p. Downtown; also works for the quick Sunday lunch stop (open at noon). <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Final+Draft+Brewing+1600+California+St+Redding+CA">🧭 Nav</a></li>
+          <li><b>Woody's Brewing Co.</b> — 1257 Oregon St · Tue–Thu 11–9, Fri–Sat 11–10, Sun 11–8 <span class="badge-warn">closed Mon</span> Open for Friday arrival. <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Woodys+Brewing+Co+1257+Oregon+St+Redding+CA">Nav</a></li>
+          <li><b>Final Draft Brewing</b> — 1600 California St · daily 11a–9/10p. Downtown; also works for the quick Sunday lunch stop (open at noon). <a class="navlink" href="https://www.google.com/maps/dir/?api=1&amp;destination=Final+Draft+Brewing+1600+California+St+Redding+CA">Nav</a></li>
         </ul>
       </li>
     </ul>
@@ -1520,9 +1581,9 @@ END:VCALENDAR
   /* Times are local (both phones stay on Pacific time for the trip). */
   var ANCHORS = [
     ["2026-07-17T14:00", "Depart San Jose (target 2–3p)", "#d1"],
-    ["2026-07-18T08:20", "Depart Redding — breakfast packed", "#d2"],
-    ["2026-07-18T09:40", "Bumpass Hell — be on trail", "#d2"],
-    ["2026-07-18T16:00", "Manzanita paddle cutoff", "#d2"],
+    ["2026-07-18T09:30", "Depart Redding — breakfast packed", "#d2"],
+    ["2026-07-18T10:45", "Bumpass Hell — be on trail", "#d2"],
+    ["2026-07-18T15:00", "Manzanita paddle", "#d2"],
     ["2026-07-18T20:35", "Sunset on Lassen Peak", "#d2"],
     ["2026-07-19T06:00", "Check out + Shasta Lake dawn fishing", "#d3"],
     ["2026-07-19T09:00", "Fern Canyon permit grab (9:00a)", "#d3"],
@@ -1563,7 +1624,7 @@ END:VCALENDAR
     if (!next) {
       whatEl.textContent = "Trip complete — drive safe";
       whatEl.removeAttribute("href");
-      whenEl.textContent = "🏁";
+      whenEl.textContent = "Done";
       return;
     }
     whatEl.textContent = next.label;
